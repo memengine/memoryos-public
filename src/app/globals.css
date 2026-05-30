@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #0d1117;
+  color: #f8fafc;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.86;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes ping-slow {
+  75%,
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  18%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes agent-reply {
+  0%,
+  28% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  44%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes query-pulse {
+  0%,
+  52% {
+    opacity: 0.25;
+    transform: scale(0.98);
+  }
+  66%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes store-memory {
+  0% {
+    opacity: 0;
+    transform: translateX(24px) scale(0.98);
+  }
+  28%,
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes skeleton-fade {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  66%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes memory-ready {
+  0%,
+  68% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  82%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 4.8s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3.8s ease-in-out infinite;
+}
+
+.animate-ping-slow {
+  animation: ping-slow 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-slide-in {
+  animation: slide-in 7.2s ease-out infinite;
+}
+
+.animate-agent-reply {
+  animation: agent-reply 7.2s ease-out infinite;
+}
+
+.animate-query-pulse {
+  animation: query-pulse 7.2s ease-in-out infinite;
+}
+
+.animate-store-memory {
+  animation: store-memory 7.2s ease-out infinite;
+}
+
+.animate-memory-ready {
+  animation: memory-ready 7.2s ease-out infinite;
+}
+
+.animate-skeleton-fade {
+  animation: skeleton-fade 7.2s ease-out infinite;
+}
