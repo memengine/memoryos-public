@@ -1,313 +1,99 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Database, Network, ShieldCheck } from "lucide-react";
-
-import { BillingToggle } from "@/components/billing-toggle";
-import { ComparisonTable } from "@/components/comparison-table";
-import { CrossAgentAddons } from "@/components/cross-agent-addons";
-import { PricingFaq } from "@/components/pricing-faq";
-import type { BillingPlan } from "@/components/plan-card";
+import { ArrowRight, Check, ChevronDown, CircleHelp, Fingerprint, ShieldCheck, Tags } from "lucide-react";
+import { PlanCard, type BillingInterval, type BillingPlan, type Currency } from "@/components/plan-card";
+import { SiteHeader } from "@/components/site-header";
 import { docsUrl } from "@/lib/docs";
-import { apiBaseUrl, salesMailUrl, signUpUrl, tenantAppUrl as getTenantAppUrl } from "@/lib/urls";
+import { salesMailUrl, signUpUrl, tenantAppUrl } from "@/lib/urls";
 
-export const dynamic = "force-dynamic";
-
-const FALLBACK_PLANS: BillingPlan[] = [
+const plans: BillingPlan[] = [
   {
-    name: "free",
-    display_name: "Free",
-    badge: "Always Free",
-    monthly_price_inr: 0,
-    annual_price_inr: 0,
-    monthly_price_usd: 0,
-    annual_price_usd: 0,
-    is_popular: false,
-    cta_text: "Start for free",
-    cta_type: "signup",
-    limits: {
-      monthly_call_limit: 5000,
-      write_call_limit: 5000,
-      read_limit: null,
-      rate_limit_per_user_per_minute: 3,
-      overage_policy: "block",
-      overage_policy_label: "API pauses when limit reached",
-    },
-    features: {
-      quality_gate: true,
-      domain_schemas: false,
-      cross_agent: false,
-      audit_log_days: 0,
-      support: "Community",
-      sla: "Best effort",
-      data_residency: "IN1 only",
-    },
+    name: "free", display_name: "Free", badge: "For experiments", monthly_price_inr: 0, annual_price_inr: 0, monthly_price_usd: 0, annual_price_usd: 0, is_popular: false, cta_text: "Start free", cta_type: "signup",
+    limits: { monthly_call_limit: 5000, write_call_limit: 5000, read_limit: null, rate_limit_per_user_per_minute: 3, overage_policy: "block", overage_policy_label: "API pauses at the monthly limit" },
+    features: { quality_gate: true, domain_schemas: false, cross_agent: false, audit_log_days: 0, support: "Community", sla: "Best effort", data_residency: "IN1" },
   },
   {
-    name: "starter",
-    display_name: "Starter",
-    badge: "Most Popular",
-    monthly_price_inr: 999,
-    annual_price_inr: 9990,
-    monthly_price_usd: 12,
-    annual_price_usd: 120,
-    is_popular: true,
-    cta_text: "Upgrade to Starter",
-    cta_type: "checkout",
-    limits: {
-      monthly_call_limit: 50000,
-      write_call_limit: 50000,
-      read_limit: null,
-      rate_limit_per_user_per_minute: 10,
-      overage_policy: "warn",
-      overage_policy_label: "AI continues without memory context",
-    },
-    features: {
-      quality_gate: true,
-      domain_schemas: false,
-      cross_agent: false,
-      audit_log_days: 30,
-      support: "Email (48h SLA)",
-      sla: "99.5%",
-      data_residency: "IN1 only",
-    },
+    name: "starter", display_name: "Starter", badge: "For shipping", monthly_price_inr: 999, annual_price_inr: 9990, monthly_price_usd: 12, annual_price_usd: 120, is_popular: true, cta_text: "Choose Starter", cta_type: "checkout",
+    limits: { monthly_call_limit: 50000, write_call_limit: 50000, read_limit: null, rate_limit_per_user_per_minute: 10, overage_policy: "warn", overage_policy_label: "AI continues without memory at the limit" },
+    features: { quality_gate: true, domain_schemas: false, cross_agent: false, audit_log_days: 30, support: "Email · 48h", sla: "99.5%", data_residency: "IN1" },
   },
   {
-    name: "growth",
-    display_name: "Growth",
-    badge: "Scale Up",
-    monthly_price_inr: 3999,
-    annual_price_inr: 39990,
-    monthly_price_usd: 48,
-    annual_price_usd: 480,
-    is_popular: false,
-    cta_text: "Upgrade to Growth",
-    cta_type: "checkout",
-    limits: {
-      monthly_call_limit: 500000,
-      write_call_limit: 500000,
-      read_limit: null,
-      rate_limit_per_user_per_minute: 30,
-      overage_policy: "warn",
-      overage_policy_label: "AI continues without memory context",
-    },
-    features: {
-      quality_gate: true,
-      domain_schemas: true,
-      cross_agent: true,
-      audit_log_days: 90,
-      support: "Email (24h SLA)",
-      sla: "99.9%",
-      data_residency: "IN1 only",
-    },
+    name: "growth", display_name: "Growth", badge: "For scaling", monthly_price_inr: 3999, annual_price_inr: 39990, monthly_price_usd: 48, annual_price_usd: 480, is_popular: false, cta_text: "Choose Growth", cta_type: "checkout",
+    limits: { monthly_call_limit: 500000, write_call_limit: 500000, read_limit: null, rate_limit_per_user_per_minute: 30, overage_policy: "warn", overage_policy_label: "AI continues without memory at the limit" },
+    features: { quality_gate: true, domain_schemas: true, cross_agent: true, audit_log_days: 90, support: "Email · 24h", sla: "99.9%", data_residency: "IN1" },
   },
   {
-    name: "enterprise",
-    display_name: "Enterprise",
-    badge: "Unlimited",
-    monthly_price_inr: null,
-    annual_price_inr: null,
-    monthly_price_usd: null,
-    annual_price_usd: null,
-    is_popular: false,
-    cta_text: "Talk to Sales",
-    cta_type: "sales",
-    limits: {
-      monthly_call_limit: null,
-      write_call_limit: null,
-      read_limit: null,
-      rate_limit_per_user_per_minute: null,
-      overage_policy: null,
-      overage_policy_label: null,
-    },
-    features: {
-      quality_gate: true,
-      domain_schemas: true,
-      cross_agent: true,
-      audit_log_days: 365,
-      support: "Dedicated Slack",
-      sla: "99.99%",
-      data_residency: "Choose region",
-    },
+    name: "enterprise", display_name: "Enterprise", badge: "For custom needs", monthly_price_inr: null, annual_price_inr: null, monthly_price_usd: null, annual_price_usd: null, is_popular: false, cta_text: "Talk to sales", cta_type: "sales",
+    limits: { monthly_call_limit: null, write_call_limit: null, read_limit: null, rate_limit_per_user_per_minute: null, overage_policy: null, overage_policy_label: "Custom capacity and overage policy" },
+    features: { quality_gate: true, domain_schemas: true, cross_agent: true, audit_log_days: 365, support: "Dedicated Slack", sla: "99.99%", data_residency: "Choose region" },
   },
 ];
 
-async function getPlans(): Promise<BillingPlan[]> {
-  const apiBase = apiBaseUrl();
-  if (!apiBase) {
-    return FALLBACK_PLANS;
-  }
+const comparison = [
+  ["API calls / month", "5K", "50K", "500K", "Unlimited"],
+  ["Quality gate", true, true, true, true],
+  ["Conflict resolution", true, true, true, true],
+  ["Version history", true, true, true, true],
+  ["Domain schemas", false, false, true, true],
+  ["Memory Passport", false, false, true, true],
+  ["Audit history", "—", "30 days", "90 days", "365 days"],
+  ["Rate limit", "3/min", "10/min", "30/min", "Custom"],
+  ["Data residency", "IN1", "IN1", "IN1", "Choose region"],
+  ["Support", "Community", "Email · 48h", "Email · 24h", "Dedicated Slack"],
+  ["Uptime SLA", "Best effort", "99.5%", "99.9%", "99.99%"],
+] as const;
 
-  try {
-    const response = await fetch(`${apiBase}/v1/billing/plans`, {
-      cache: "no-store",
-    });
-    if (!response.ok) {
-      return FALLBACK_PLANS;
-    }
-    const payload = (await response.json()) as unknown;
-    return Array.isArray(payload) ? (payload as BillingPlan[]) : FALLBACK_PLANS;
-  } catch {
-    return FALLBACK_PLANS;
-  }
+const addons = [
+  { icon: Fingerprint, title: "Global agent registration", price: "₹999 / month", description: "Register your agent and let users grant category-scoped memory access.", features: ["Agent API key", "Public agent profile", "Consent URL generation"] },
+  { icon: ShieldCheck, title: "Verified agent badge", price: "₹4,999 once", description: "Add verified company status to your public consent experience.", features: ["Company review", "Verified badge", "Higher user trust"] },
+  { icon: Tags, title: "White-label consent", price: "₹9,999 / month", description: "Host the consent journey on your own domain and brand.", features: ["Custom domain", "Brand controls", "Priority support"] },
+];
+
+const faqs = [
+  ["Do I need a credit card for Free?", "No. You can start on Free without a card and add billing only when you choose a paid plan."],
+  ["What counts as an API call?", "Each MemoryOS write, retrieval, tenant operation, or feedback request counts as one API call."],
+  ["What happens at the monthly limit?", "Free pauses at the limit. Paid plans can keep the AI running without memory context until capacity is restored or upgraded."],
+  ["Can I change billing intervals?", "Yes. You can move between monthly and annual billing. Annual billing includes two months free."],
+  ["Which plans include Memory Passport?", "Growth and Enterprise include cross-agent, category-scoped memory access through Memory Passport."],
+  ["What are domain schemas?", "Domain schemas add structured extraction for products such as EdTech and customer support on top of general memory."],
+  ["Can I cancel anytime?", "Yes. Your paid plan remains active until the end of its current billing period."],
+  ["Do you support enterprise contracts?", "Yes. Enterprise includes custom limits, procurement terms, regional options, and dedicated support."],
+] as const;
+
+function SegmentedControl<T extends string>({ label, value, options, onChange }: { label: string; value: T; options: Array<{ value: T; label: string }>; onChange: (value: T) => void }) {
+  return <div><span className="sr-only">{label}</span><div role="group" aria-label={label} className="inline-flex rounded-xl border border-white/10 bg-white/[0.035] p-1">{options.map((option) => <button key={option.value} type="button" aria-pressed={value === option.value} onClick={() => onChange(option.value)} className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${value === option.value ? "bg-white text-slate-950" : "text-slate-400 hover:text-white"}`}>{option.label}</button>)}</div></div>;
 }
 
-export default async function PricingPage() {
-  const plans = await getPlans();
-  const tenantAppUrl = getTenantAppUrl();
-  const quickstartDocsUrl = docsUrl("/quickstart");
+function ComparisonTable() {
+  const names = ["Free", "Starter", "Growth", "Enterprise"];
+  return <div><p className="mb-3 text-xs text-slate-500 sm:hidden">Swipe horizontally to compare plans →</p><div className="overflow-x-auto rounded-2xl border border-white/10"><div className="min-w-[760px]"><div className="grid grid-cols-[1.35fr_repeat(4,1fr)] border-b border-white/10 bg-white/[0.035]"><div className="sticky left-0 bg-[#0d141f] px-4 py-4 text-xs font-semibold text-slate-400">Capability</div>{names.map((name) => <div key={name} className="px-3 py-4 text-center text-sm font-bold text-white">{name}</div>)}</div>{comparison.map((row, index) => <div key={row[0]} className={`grid grid-cols-[1.35fr_repeat(4,1fr)] ${index % 2 === 0 ? "bg-white/[0.018]" : ""}`}><div className="sticky left-0 bg-[#0a1019] px-4 py-3.5 text-sm font-medium text-slate-300">{row[0]}</div>{row.slice(1).map((value, cell) => <div key={`${row[0]}-${cell}`} className="flex items-center justify-center px-3 py-3.5 text-center text-sm text-slate-400">{typeof value === "boolean" ? value ? <Check className="size-4 text-emerald-300" aria-label="Included" /> : <span className="text-slate-700">—</span> : value}</div>)}</div>)}</div></div></div>;
+}
 
-  return (
-    <main className="min-h-screen bg-[#0D1117]">
-      <section className="relative overflow-hidden bg-[#0D1117] px-4 pb-16 pt-8 text-white sm:px-6 sm:pb-20 lg:px-8">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between">
-          <Link href="/pricing" className="flex items-center gap-3">
-            <span className="flex size-9 items-center justify-center rounded-lg bg-white text-sm font-bold text-[#0D1117]">
-              M
-            </span>
-            <span className="text-sm font-bold uppercase tracking-[0.22em] text-slate-200">
-              MemoryOS
-            </span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <a
-              href={quickstartDocsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden text-sm font-semibold text-slate-300 transition hover:text-white sm:inline"
-            >
-              Docs
-            </a>
-            <Link
-              href={signUpUrl("/")}
-              className="inline-flex h-10 items-center justify-center rounded-xl bg-white px-4 text-sm font-semibold text-[#0D1117] transition hover:bg-slate-200"
-            >
-              Start free
-            </Link>
-          </div>
-        </nav>
+function PricingFaq() {
+  const [open, setOpen] = useState<number | null>(0);
+  return <div className="mx-auto max-w-3xl"><div className="text-center"><p className="text-xs font-bold uppercase tracking-wider text-cyan-300">Questions, answered</p><h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">Pricing without surprises</h2></div><div className="mt-9 divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.025]">{faqs.map(([question, answer], index) => { const expanded = open === index; const answerId = `pricing-answer-${index}`; return <div key={question}><button type="button" aria-expanded={expanded} aria-controls={answerId} onClick={() => setOpen(expanded ? null : index)} className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"><span className="text-sm font-semibold text-white">{question}</span><ChevronDown className={`size-4 shrink-0 text-slate-500 transition-transform ${expanded ? "rotate-180" : ""}`} /></button><div id={answerId} hidden={!expanded} className="px-5 pb-5 text-sm leading-6 text-slate-400">{answer}</div></div>; })}</div></div>;
+}
 
-        <div className="mx-auto grid max-w-7xl items-center gap-10 pt-16 lg:grid-cols-[1.02fr_0.98fr] lg:pt-24">
-          <div className="text-center lg:text-left">
-            <div className="inline-flex rounded-full border border-[#2E75B6]/50 bg-[#0B1D32]/70 px-4 py-1.5 text-sm font-medium text-sky-100">
-              Simple, transparent pricing
-            </div>
-            <h1 className="mt-8 text-4xl font-bold tracking-tight sm:text-6xl">
-              <span className="block text-white">The Memory Layer for AI</span>
-              <span className="block text-slate-400">Pay only for what you use</span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg lg:mx-0">
-              Add persistent memory to your AI product in 5 minutes. Free tier
-              included. No credit card required.
-            </p>
-            <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-              <Link
-                href={signUpUrl("/")}
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-[#2E75B6] px-6 text-sm font-semibold text-white transition hover:bg-[#25639b]"
-              >
-                Start for free
-              </Link>
-              <a
-                href={salesMailUrl()}
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-[#30363D] bg-transparent px-6 text-sm font-semibold text-slate-100 transition hover:border-slate-500"
-              >
-                Talk to Sales
-              </a>
-            </div>
-          </div>
+export default function PricingPage() {
+  const [billing, setBilling] = useState<BillingInterval>("monthly");
+  const [currency, setCurrency] = useState<Currency>("inr");
+  const quickstart = docsUrl("/quickstart");
 
-          <div className="rounded-2xl border border-[#30363D] bg-[#161B22] p-5 shadow-2xl shadow-black/30">
-            <div className="grid gap-3">
-              {[
-                {
-                  icon: Database,
-                  title: "Memory Write Path",
-                  meta: "quality gate + async extraction",
-                },
-                {
-                  icon: ShieldCheck,
-                  title: "Domain Schemas",
-                  meta: "General, EdTech, Support",
-                },
-                {
-                  icon: Network,
-                  title: "Memory Passport",
-                  meta: "user-approved cross-agent context",
-                },
-              ].map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={item.title}
-                    className="rounded-xl border border-[#30363D] bg-[#0D1117] p-4"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Icon className="size-5 text-sky-300" />
-                      <div>
-                        <div className="font-semibold text-white">{item.title}</div>
-                        <div className="text-sm text-slate-400">{item.meta}</div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="mt-5 rounded-xl border border-[#2E75B6]/40 bg-[#0B1D32] p-4 text-sm leading-6 text-slate-300">
-              MemoryOS stores durable user context, retrieves only what is
-              relevant, and keeps plan limits synced from the billing API.
-            </div>
-          </div>
-        </div>
-      </section>
+  return <main className="min-h-screen bg-[#05080d] text-white"><SiteHeader dark />
+    <section className="relative overflow-hidden px-4 pb-14 pt-16 sm:px-6 lg:px-8"><div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[60rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.12),transparent_65%)]" /><div className="relative mx-auto max-w-4xl text-center"><div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/[0.07] px-4 py-2 text-sm font-semibold text-cyan-200"><CircleHelp className="size-4" /> Simple, transparent pricing</div><h1 className="mt-7 text-4xl font-bold text-white sm:text-5xl md:text-6xl">Start small. Scale memory when your product does.</h1><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-400">Every plan includes reliable memory extraction and retrieval. Upgrade when you need more volume, domain intelligence, or user-controlled memory sharing.</p><div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"><Link href={signUpUrl("/")} className="inline-flex h-12 items-center gap-2 rounded-xl bg-white px-6 text-sm font-semibold text-slate-950 transition hover:bg-slate-200">Start free <ArrowRight className="size-4" /></Link><a href={salesMailUrl()} className="inline-flex h-12 items-center rounded-xl border border-white/15 px-6 text-sm font-semibold text-white transition hover:bg-white/[0.05]">Talk to sales</a></div></div></section>
 
-      <section className="border-y border-[#30363D] bg-[#161B22] px-4 py-4 text-slate-400 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-5xl snap-x gap-6 overflow-x-auto text-sm md:justify-center md:overflow-visible">
-          {[
-            "10M+ Memories Stored",
-            "5 Domain Schemas",
-            "99.9% Uptime",
-            "Loved by developers",
-          ].map((item, index) => (
-            <div
-              key={item}
-              className={`shrink-0 snap-start pr-6 ${
-                index === 3 ? "" : "border-r border-[#30363D]"
-              }`}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-      </section>
+    <section className="px-4 pb-20 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl"><div className="flex flex-col items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.025] p-4 sm:flex-row"><div><p className="text-sm font-semibold text-white">Choose how you want to compare</p><p className="mt-1 text-xs text-slate-400">Annual plans include two months free.</p></div><div className="flex flex-wrap justify-center gap-3"><SegmentedControl label="Billing interval" value={billing} onChange={setBilling} options={[{ value: "monthly", label: "Monthly" }, { value: "annual", label: "Annual" }]} /><SegmentedControl label="Currency" value={currency} onChange={setCurrency} options={[{ value: "inr", label: "INR" }, { value: "usd", label: "USD" }]} /></div></div><div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">{plans.map((plan) => <PlanCard key={plan.name} plan={plan} billing={billing} currency={currency} tenantAppUrl={tenantAppUrl()} />)}</div><p className="mt-5 text-center text-xs leading-5 text-slate-400">API call limits include writes, retrievals, tenant operations, and feedback requests. Taxes may apply based on billing location.</p></div></section>
 
-      <BillingToggle plans={plans} tenantAppUrl={tenantAppUrl} />
-      <CrossAgentAddons />
-      <ComparisonTable />
-      <PricingFaq />
+    <section className="border-y border-white/[0.07] bg-[#080d14] px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto max-w-6xl"><div className="text-center"><p className="text-xs font-bold uppercase tracking-wider text-cyan-300">Side-by-side</p><h2 className="mt-4 text-3xl font-bold sm:text-4xl">Compare the details</h2><p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-slate-400">The same memory foundation at every level, with more capacity and governance as you grow.</p></div><div className="mt-9"><ComparisonTable /></div></div></section>
 
-      <section className="bg-[#0D1117] px-4 py-20 text-center text-white sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Start building in 5 minutes
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-base text-slate-400">
-          Join developers building smarter AI products with MemoryOS.
-        </p>
-        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <Link
-            href={signUpUrl("/")}
-            className="inline-flex h-12 items-center justify-center rounded-xl bg-[#2E75B6] px-6 text-sm font-semibold text-white transition hover:bg-[#25639b]"
-          >
-            Start for free
-          </Link>
-          <a
-            href={quickstartDocsUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-[#30363D] px-6 text-sm font-semibold text-slate-100 transition hover:border-slate-500"
-          >
-            Read the docs
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </a>
-        </div>
-      </section>
-    </main>
-  );
+    <section className="px-4 py-20 sm:px-6 lg:px-8"><div className="mx-auto max-w-6xl"><div className="max-w-2xl"><p className="text-xs font-bold uppercase tracking-wider text-violet-300">Optional network services</p><h2 className="mt-4 text-3xl font-bold sm:text-4xl">Add user-controlled memory sharing</h2><p className="mt-3 leading-7 text-slate-400">Register an agent, earn user trust, and create a consent experience that matches your product.</p></div><div className="mt-9 grid gap-5 md:grid-cols-3">{addons.map((addon) => <article key={addon.title} className="rounded-2xl border border-white/10 bg-white/[0.025] p-6"><span className="flex size-10 items-center justify-center rounded-xl bg-violet-300/10 text-violet-200"><addon.icon className="size-5" /></span><h3 className="mt-5 text-lg font-bold">{addon.title}</h3><p className="mt-1 text-lg font-semibold text-violet-200">{addon.price}</p><p className="mt-3 text-sm leading-6 text-slate-400">{addon.description}</p><ul className="mt-5 space-y-2">{addon.features.map((feature) => <li key={feature} className="flex items-center gap-2 text-sm text-slate-300"><Check className="size-4 text-emerald-300" />{feature}</li>)}</ul></article>)}</div></div></section>
+
+    <section className="border-y border-white/[0.07] bg-[#080d14] px-4 py-20 sm:px-6 lg:px-8"><PricingFaq /></section>
+
+    <section className="px-4 py-20 text-center sm:px-6 lg:px-8"><div className="mx-auto max-w-2xl"><h2 className="text-3xl font-bold sm:text-4xl">Build your first memory flow today</h2><p className="mx-auto mt-4 max-w-lg text-lg leading-7 text-slate-400">Start free, validate the product experience, and upgrade when real usage arrives.</p><div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"><Link href={signUpUrl("/")} className="inline-flex h-12 items-center gap-2 rounded-xl bg-white px-6 text-sm font-semibold text-slate-950">Start free <ArrowRight className="size-4" /></Link><a href={quickstart} target="_blank" rel="noreferrer" className="inline-flex h-12 items-center gap-2 rounded-xl border border-white/15 px-6 text-sm font-semibold text-white">Read the quickstart <ArrowRight className="size-4" /></a></div></div></section>
+
+    <footer className="border-t border-white/[0.07] px-4 py-10 sm:px-6"><div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 sm:flex-row"><span className="text-sm font-semibold text-slate-400">MemoryOS</span><div className="flex items-center gap-6 text-sm text-slate-500"><Link href="/">Home</Link><Link href="/memory-passport">Passport</Link><a href={quickstart} target="_blank" rel="noreferrer">Docs</a></div><span className="text-xs text-slate-600">© {new Date().getFullYear()} MemoryOS</span></div></footer>
+  </main>;
 }
