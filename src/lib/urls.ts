@@ -3,7 +3,7 @@ export function cleanBaseUrl(value: string | undefined, fallback: string): strin
 }
 
 export function tenantAppUrl(): string {
-  return cleanBaseUrl(process.env.NEXT_PUBLIC_TENANT_APP_URL, "");
+  return cleanBaseUrl(process.env.NEXT_PUBLIC_TENANT_APP_URL, "https://app.memoryo.dev");
 }
 
 export function apiBaseUrl(): string {
@@ -12,9 +12,6 @@ export function apiBaseUrl(): string {
 
 export function tenantPath(path = "/"): string {
   const baseUrl = tenantAppUrl();
-  if (!baseUrl) {
-    return "#";
-  }
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   return `${baseUrl}${normalizedPath}`;
 }
