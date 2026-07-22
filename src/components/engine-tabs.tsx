@@ -129,7 +129,7 @@ export function EngineTabs() {
   const ActiveIcon = active.icon;
 
   return (
-    <section id="engines" className="bg-white px-4 py-24 text-slate-950 sm:px-6 lg:px-8">
+    <section id="engines" className="bg-white px-4 py-20 text-slate-950 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <div className="text-sm font-black uppercase tracking-[0.28em] text-[#2E75B6]">
@@ -144,7 +144,7 @@ export function EngineTabs() {
           </p>
         </div>
 
-        <div className="mt-10 flex gap-3 overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50 p-2">
+        <div className="mt-8 flex gap-3 overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50 p-2">
           {engines.map((engine) => (
             <button
               key={engine.key}
