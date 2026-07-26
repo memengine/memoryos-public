@@ -80,10 +80,20 @@ function ArchitecturePreview() {
 export default function HomePage() {
   const quickstart = docsUrl("/quickstart");
   const docs = docsUrl("/");
+  const legalLinks = [
+    { label: "Privacy", href: docsUrl("/privacy") },
+    { label: "Terms", href: docsUrl("/terms") },
+    { label: "Cookies", href: docsUrl("/cookie-policy") },
+    { label: "Refunds", href: docsUrl("/refund-cancellation") },
+    { label: "Security", href: docsUrl("/security") },
+    { label: "DPA", href: docsUrl("/dpa") },
+    { label: "Support", href: docsUrl("/support-availability") },
+    { label: "Contact", href: docsUrl("/contact") },
+  ];
 
   return (
-    <main className="min-h-screen bg-white text-slate-950">
-      <SiteHeader />
+    <main className="marketing-dark min-h-screen bg-[#05080d] text-white">
+      <SiteHeader dark />
 
       <section className="relative overflow-hidden border-b border-slate-200 px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.06)_1px,transparent_1px)] bg-[size:72px_72px]" />
@@ -98,7 +108,7 @@ export default function HomePage() {
               Give your AI the context it should never forget.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              MemoryOS turns conversations into governed, prompt-ready memory across sessions, agents, and services. Extraction, retrieval, conflict resolution, provenance, consent, and domain schemas—in one API.
+              MemoryOS turns conversations into governed, prompt-ready memory across sessions, agents, and services. Extraction, retrieval, conflict resolution, provenance, consent, and domain schemas - in one API.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="#playground" className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-violet-600 px-5 text-sm font-bold text-white shadow-lg shadow-violet-500/20 transition hover:-translate-y-0.5 hover:bg-violet-700">
@@ -210,13 +220,13 @@ context = mem.get(query, external_user_id="user_123")`}</code></pre>
       </section>
 
       <footer className="bg-[#0D1117] px-4 py-14 text-white sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
           <div><div className="flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-xl bg-white/10 font-black">M</span><span className="font-black uppercase tracking-[0.2em]">MemoryOS</span></div><p className="mt-6 max-w-sm leading-7 text-slate-400">Reliable memory infrastructure for AI products, agents, and services.</p></div>
           <div><p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">Product</p><div className="mt-5 space-y-3 text-sm text-slate-300"><Link href="/#engines" className="block">Engines</Link><Link href="/#playground" className="block">Playground</Link><Link href="/pricing" className="block">Pricing</Link></div></div>
           <div><p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">Use cases</p><div className="mt-5 space-y-3 text-sm text-slate-300"><Link href="/use-cases/customer-support" className="block">Customer Support</Link><Link href="/use-cases/edtech" className="block">Education</Link><Link href="/memory-passport" className="block">Memory Passport</Link></div></div>
-          <div><p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">Developers</p><div className="mt-5 space-y-3 text-sm text-slate-300"><a href={docs} target="_blank" rel="noreferrer" className="block">Documentation</a><a href={quickstart} target="_blank" rel="noreferrer" className="block">Quickstart</a><Link href="/#production" className="block">Production controls</Link></div></div>
+          <div><p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">Developers</p><div className="mt-5 space-y-3 text-sm text-slate-300"><a href={docs} target="_blank" rel="noreferrer" className="block">Documentation</a><a href={quickstart} target="_blank" rel="noreferrer" className="block">Quickstart</a><Link href="/#production" className="block">Production controls</Link></div></div><div><p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">Legal</p><div className="mt-5 space-y-3 text-sm text-slate-300">{legalLinks.map((link) => (<a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="block">{link.label}</a>))}</div></div>
         </div>
-        <div className="mx-auto mt-12 flex max-w-7xl flex-col gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"><span>© {new Date().getFullYear()} MemoryOS</span><span>Context that persists. Control that scales.</span></div>
+        <div className="mx-auto mt-12 flex max-w-7xl flex-col gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"><span>Copyright {new Date().getFullYear()} MemoryOS</span><span>Context that persists. Control that scales.</span></div>
       </footer>
     </main>
   );
