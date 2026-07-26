@@ -1,0 +1,146 @@
+/* Homepage-wide dark system. Subtle surface changes replace white section breaks. */
+.marketing-dark {
+  min-height: 100vh;
+  background: #05080d;
+  color: #f8fafc;
+}
+
+.marketing-dark > section {
+  border-color: rgba(255, 255, 255, 0.075) !important;
+  background-color: #05080d;
+}
+
+.marketing-dark > section:nth-of-type(even) {
+  background-color: #080d14;
+}
+
+.marketing-dark > section:first-of-type {
+  background:
+    radial-gradient(circle at 12% 20%, rgba(124, 58, 237, 0.17), transparent 30rem),
+    radial-gradient(circle at 92% 74%, rgba(34, 211, 238, 0.11), transparent 28rem),
+    #05080d;
+}
+
+.marketing-dark > section:first-of-type > .absolute.inset-0 {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.075) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.075) 1px, transparent 1px) !important;
+}
+
+.marketing-dark > section:first-of-type .bg-violet-100,
+.marketing-dark > section:first-of-type .bg-sky-100 {
+  opacity: 0.22;
+}
+
+/* Translate the former light Tailwind surfaces only inside the dark homepage. */
+.marketing-dark .bg-white { background-color: #0c131e !important; }
+.marketing-dark .bg-white\/90 { background-color: rgba(12, 19, 30, 0.9) !important; }
+.marketing-dark .bg-white\/80 { background-color: rgba(12, 19, 30, 0.8) !important; }
+.marketing-dark .bg-slate-50 { background-color: #080d14 !important; }
+.marketing-dark .text-slate-950 { color: #f8fafc !important; }
+.marketing-dark .text-slate-800 { color: #dbe5f1 !important; }
+.marketing-dark .text-slate-700 { color: #c6d1df !important; }
+.marketing-dark .text-slate-600 { color: #9aa9bd !important; }
+.marketing-dark .text-slate-500 { color: #718096 !important; }
+.marketing-dark .border-slate-300,
+.marketing-dark .border-slate-200,
+.marketing-dark .border-slate-100 { border-color: rgba(255, 255, 255, 0.11) !important; }
+.marketing-dark .shadow-sm { box-shadow: 0 12px 34px rgba(0, 0, 0, 0.2) !important; }
+
+.marketing-dark .text-violet-800,
+.marketing-dark .text-violet-700 { color: #c4b5fd !important; }
+.marketing-dark .text-violet-950 { color: #f5f3ff !important; }
+.marketing-dark .text-violet-950\/60 { color: rgba(245, 243, 255, 0.68) !important; }
+.marketing-dark .text-violet-950\/75,
+.marketing-dark .text-violet-900\/70 { color: rgba(221, 214, 254, 0.76) !important; }
+.marketing-dark .border-violet-200 { border-color: rgba(167, 139, 250, 0.28) !important; }
+.marketing-dark .border-violet-950\/20 { border-color: rgba(196, 181, 253, 0.22) !important; }
+.marketing-dark .bg-violet-50 { background-color: rgba(124, 58, 237, 0.14) !important; }
+.marketing-dark .bg-violet-100 { background-color: rgba(124, 58, 237, 0.12) !important; }
+.marketing-dark .bg-violet-300 {
+  background:
+    radial-gradient(circle at 88% 15%, rgba(34, 211, 238, 0.16), transparent 20rem),
+    linear-gradient(135deg, #16102b, #101827 58%, #09202a) !important;
+  border: 1px solid rgba(167, 139, 250, 0.24);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+}
+
+.marketing-dark .bg-amber-100 {
+  background-color: rgba(245, 158, 11, 0.14) !important;
+  color: #fcd34d !important;
+}
+.marketing-dark .bg-sky-100 {
+  background-color: rgba(14, 165, 233, 0.14) !important;
+  color: #7dd3fc !important;
+}
+
+/* Shared light cards become elevated ink surfaces instead of flat white blocks. */
+.marketing-dark article.bg-white,
+.marketing-dark article.bg-slate-50,
+.marketing-dark a.bg-white,
+.marketing-dark #engines .bg-slate-50 {
+  border-color: rgba(148, 163, 184, 0.16) !important;
+  background:
+    linear-gradient(145deg, rgba(16, 24, 39, 0.96), rgba(8, 13, 22, 0.98)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 18px 42px rgba(0, 0, 0, 0.18) !important;
+}
+
+.marketing-dark article.bg-white:hover,
+.marketing-dark a.bg-white:hover {
+  border-color: rgba(103, 232, 249, 0.24) !important;
+}
+
+/* Engine selector: dark inactive tabs, bright active context. */
+.marketing-dark #engines {
+  background: #080d14 !important;
+  color: #f8fafc !important;
+}
+.marketing-dark #engines > div > div.flex.gap-3 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: #0b121d !important;
+}
+.marketing-dark #engines button:not([class*="bg-[#0D1117]"]) {
+  color: #94a3b8 !important;
+}
+.marketing-dark #engines button:hover {
+  background: rgba(255, 255, 255, 0.055) !important;
+  color: #fff !important;
+}
+.marketing-dark #engines .bg-\[\#0D1117\] {
+  background: linear-gradient(135deg, #6d28d9, #2563eb) !important;
+}
+
+/* Preserve a clearly secondary quickstart action without returning to white. */
+.marketing-dark > section:first-of-type a.bg-white {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  background: rgba(255, 255, 255, 0.055) !important;
+  color: #f8fafc !important;
+}
+.marketing-dark > section:first-of-type a.bg-white:hover {
+  border-color: rgba(103, 232, 249, 0.35) !important;
+  background: rgba(255, 255, 255, 0.085) !important;
+}
+
+/* Production dashboard callout and final CTA remain colorful, but dark. */
+.marketing-dark #production > div > div:last-child {
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  background:
+    radial-gradient(circle at 88% 30%, rgba(34, 211, 238, 0.12), transparent 17rem),
+    linear-gradient(135deg, rgba(124, 58, 237, 0.14), rgba(15, 23, 42, 0.8)) !important;
+}
+.marketing-dark #production > div > div:last-child a {
+  box-shadow: 0 12px 28px rgba(76, 29, 149, 0.28);
+}
+
+.marketing-dark footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: #030509 !important;
+}
+
+@media (max-width: 700px) {
+  .marketing-dark > section:first-of-type {
+    background:
+      radial-gradient(circle at 20% 10%, rgba(124, 58, 237, 0.15), transparent 22rem),
+      #05080d;
+  }
+}
