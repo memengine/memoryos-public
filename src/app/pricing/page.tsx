@@ -198,7 +198,7 @@ export default function PricingPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#05080d] text-white">
+    <main className="min-h-screen bg-[#050506] text-white">
       <SiteHeader dark />
       <section className="relative overflow-hidden px-4 pb-14 pt-16 sm:px-6 lg:px-8">
         <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[60rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.12),transparent_65%)]" />
@@ -236,7 +236,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="border-y border-white/[0.07] bg-[#080d14] px-4 py-20 sm:px-6 lg:px-8">
+      <section className="border-y border-white/[0.07] bg-[#09090b] px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
             <p className="text-xs font-bold uppercase tracking-wider text-cyan-300">Side-by-side</p>
@@ -247,7 +247,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="border-b border-white/[0.07] bg-[#05080d] px-4 py-20 sm:px-6 lg:px-8"><PricingFaq /></section>
+      <section className="border-b border-white/[0.07] bg-[#050506] px-4 py-20 sm:px-6 lg:px-8"><PricingFaq /></section>
 
       <section className="px-4 py-20 text-center sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
