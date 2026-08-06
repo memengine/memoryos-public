@@ -5,7 +5,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: #0d1117;
+  background: #050506;
   color: #f8fafc;
   font-family: "Segoe UI Variable Text", "Segoe UI", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-optical-sizing: auto;
@@ -14,6 +14,103 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
+}
+
+html,
+body { overflow-x: clip; }
+
+.production-foundations__card {
+  width: min(100%, calc(100vw - 2rem));
+}
+
+.production-foundations__fade { display: none; }
+
+@media (min-width: 640px) and (max-width: 1024px) {
+  .production-foundations__track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .production-foundations__card { width: auto; }
+}
+
+.production-foundations.is-horizontal { padding-block: 0; }
+
+.production-foundations.is-horizontal .production-foundations__sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 2.5rem;
+}
+
+.production-foundations.is-horizontal .production-foundations__track {
+  flex-direction: row;
+  gap: 1.75rem;
+}
+
+.production-foundations.is-horizontal .production-foundations__card {
+  width: clamp(26.25rem, 31vw, 30rem);
+  min-height: 17.5rem;
+}
+
+.production-foundations.is-horizontal .production-foundations__fade { display: block; }
+.production-foundations__fade--left {
+  background: linear-gradient(90deg, #09090b 0%, rgba(9, 9, 11, 0) 100%);
+}
+.production-foundations__fade--right {
+  background: linear-gradient(270deg, #09090b 0%, rgba(9, 9, 11, 0) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .production-foundations {
+    height: auto !important;
+  }
+
+  .production-foundations__sticky {
+    position: static;
+    height: auto;
+    padding-block: 5rem;
+  }
+
+  .production-foundations__viewport { overflow: visible; }
+
+  .production-foundations__track {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .production-foundations__card {
+    width: auto;
+    min-height: 0;
+  }
+
+  .production-foundations__fade { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 1024px) {
+  .production-foundations__track { grid-template-columns: 1fr; }
+}
+
+button,
+input,
+select,
+textarea { font: inherit; }
+
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+select:not(:disabled) { cursor: pointer; }
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 /* Keep the visual confidence while avoiding the dense, poster-like weight. */
@@ -67,6 +164,16 @@ a { text-decoration: none; }
   0%, 68% { opacity: 0; transform: translateY(12px); }
   82%, 100% { opacity: 1; transform: translateY(0); }
 }
+@keyframes engine-panel-in {
+  from { opacity: 0; transform: translate3d(12px, 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes engine-panel-out {
+  from { opacity: 1; transform: translate3d(0, 0, 0); }
+  to { opacity: 0; transform: translate3d(-12px, 0, 0); }
+}
+.engine-panel-enter { animation: engine-panel-in 420ms ease both; }
+.engine-panel-exit { animation: engine-panel-out 420ms ease both; }
 .animate-float { animation: float 4.8s ease-in-out infinite; }
 .animate-pulse-slow { animation: pulse-slow 3.8s ease-in-out infinite; }
 .animate-ping-slow { animation: ping-slow 2.2s cubic-bezier(0, 0, 0.2, 1) infinite; }
