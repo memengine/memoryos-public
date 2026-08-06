@@ -25,7 +25,10 @@ export function mailtoUrl(email: string | undefined): string {
 }
 
 export function salesMailUrl(): string {
-  return mailtoUrl(process.env.NEXT_PUBLIC_SALES_EMAIL);
+  const email = process.env.NEXT_PUBLIC_SALES_EMAIL;
+  if (email) return `mailto:${email}`;
+  // Fallback to a contact page so the CTA is never a dead "#" link
+  return "mailto:support@memoryo.dev";
 }
 
 export function verifyMailUrl(): string {
