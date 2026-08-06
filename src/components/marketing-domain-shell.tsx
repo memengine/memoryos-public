@@ -132,11 +132,11 @@ export function MarketingDomainShell({
   const docs = docsUrl(docsPath);
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#05060a] text-white">
+    <main className="min-h-screen overflow-hidden bg-[#050506] text-white">
       <SiteHeader dark />
 
       <section className="relative px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(124,58,237,0.16),transparent_32%),linear-gradient(180deg,#05060a_0%,#080a10_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(124,58,237,0.14),transparent_32%),linear-gradient(180deg,#050506_0%,#09090b_100%)]" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.92fr_1.08fr]">
           <div>
             <div className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-black uppercase tracking-[0.22em] ${a.badge}`}>
@@ -182,7 +182,7 @@ export function MarketingDomainShell({
         </div>
       </section>
 
-      <section className="bg-[#05060a] px-4 py-24 sm:px-6 lg:px-8">
+      <section className="bg-[#050506] px-4 py-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
             <p className={`text-xs font-black uppercase tracking-[0.28em] ${a.text}`}>What you get</p>
@@ -229,7 +229,7 @@ export function MarketingDomainShell({
         </div>
       </section>
 
-      <section className="bg-[#05060a] px-4 py-24 text-center sm:px-6 lg:px-8">
+      <section className="bg-[#050506] px-4 py-24 text-center sm:px-6 lg:px-8">
         <div className={`mx-auto flex size-16 items-center justify-center rounded-3xl border ${a.soft}`}>
           <HeroIcon className={`size-8 ${a.text}`} />
         </div>
