@@ -5,11 +5,9 @@ import {
   Bot,
   Braces,
   CheckCircle2,
-  Clock3,
   Code2,
   Database,
   Fingerprint,
-  Gauge,
   GitBranch,
   GraduationCap,
   Headphones,
@@ -17,33 +15,31 @@ import {
   Network,
   Play,
   SearchCheck,
-  ShieldCheck,
   Sparkles,
-  Waypoints,
 } from "lucide-react";
 
 import { EngineTabs } from "@/components/engine-tabs";
 import { HeroProductTour } from "@/components/hero-product-tour";
 import { ProductFlowWalkthrough } from "@/components/product-flow-walkthrough";
+import { ProductionFoundations } from "@/components/production-foundations";
 import { PublicMemoryPlayground } from "@/components/public-memory-playground";
 import { SiteHeader } from "@/components/site-header";
 import { docsUrl } from "@/lib/docs";
 import { salesMailUrl, signUpUrl } from "@/lib/urls";
+import { buildMetadata, webPageJsonLd } from "@/lib/seo";
+
+export const metadata = buildMetadata({
+  title: "MemoryOS — Reliable memory infrastructure for AI products",
+  description:
+    "Turn conversations into governed, prompt-ready memory across sessions, agents, and services — with conflict resolution, provenance, consent, and domain schemas built in.",
+  path: "/",
+});
 
 const pipeline = [
   { title: "Add", copy: "Conversations, tickets, lessons, tool events, and corrections.", icon: Database },
   { title: "Extract", copy: "Durable facts, preferences, goals, procedures, and domain signals.", icon: SearchCheck },
   { title: "Resolve", copy: "Authority, recency, conflicts, provenance, and version history.", icon: GitBranch },
   { title: "Retrieve", copy: "Compact, prompt-ready context for the next model call.", icon: Braces },
-];
-
-const productionControls = [
-  { icon: SearchCheck, title: "Quality gates", body: "Block duplicate, low-signal, over-budget, or rate-limited writes before they pollute memory." },
-  { icon: GitBranch, title: "Conflict resolution", body: "Use authority, source truth, recency, and explicit review paths instead of storing contradictions forever." },
-  { icon: Waypoints, title: "Provenance", body: "Track which service wrote a memory, what evidence produced it, and why retrieval trusts it." },
-  { icon: Clock3, title: "Lifecycle controls", body: "Reinforce useful memory, archive stale facts, preserve versions, and handle corrections without losing history." },
-  { icon: Gauge, title: "Graceful degradation", body: "Keep your product responsive when quotas or dependencies force a partial memory experience." },
-  { icon: ShieldCheck, title: "Tenant isolation", body: "Keep customer memory scoped to the right tenant, user, agent, and permission boundary." },
 ];
 
 const useCases = [
@@ -92,7 +88,20 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="marketing-dark min-h-screen bg-[#05080d] text-white">
+    <main className="marketing-dark min-h-screen bg-[#050506] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            webPageJsonLd({
+              name: "MemoryOS — Reliable memory infrastructure for AI products",
+              description:
+                "Turn conversations into governed, prompt-ready memory across sessions, agents, and services — with conflict resolution, provenance, consent, and domain schemas built in.",
+              url: "https://memoryo.dev",
+            })
+          ),
+        }}
+      />
       <SiteHeader dark />
 
       <section className="relative overflow-hidden border-b border-slate-200 px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
@@ -165,7 +174,7 @@ export default function HomePage() {
           </div>
           <div id="developers" className="mt-8 grid gap-5 rounded-[1.75rem] border border-white/10 bg-black/30 p-6 lg:grid-cols-[0.78fr_1.22fr]">
             <div className="p-3"><Code2 className="size-7 text-violet-300" /><h3 className="mt-6 text-3xl font-black">Two calls to start.</h3><p className="mt-4 max-w-md leading-8 text-slate-400">Write after a conversation. Retrieve before the next model call. Add source metadata, domain schemas, or Memory Passport when your product needs them.</p></div>
-            <pre className="overflow-x-auto rounded-2xl border border-white/10 bg-[#05060a] p-6 text-sm leading-8 text-slate-300"><code>{`from memoryos import Memory
+            <pre className="overflow-x-auto rounded-2xl border border-white/10 bg-[#070709] p-6 text-sm leading-8 text-slate-300"><code>{`from memoryos import Memory
 
 mem = Memory(api_key="mem_live_xxx")
 
@@ -178,24 +187,7 @@ context = mem.get(query, external_user_id="user_123")`}</code></pre>
       <ProductFlowWalkthrough />
       <PublicMemoryPlayground />
 
-      <section id="production" className="bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-            <div><p className="text-sm font-black uppercase tracking-[0.24em] text-violet-700">Production foundations</p><h2 className="mt-4 text-4xl font-black sm:text-5xl">Reliable after the demo.</h2></div>
-            <p className="text-xl leading-9 text-slate-600">MemoryOS provides the controls teams usually discover only after their first memory prototype reaches real users.</p>
-          </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {productionControls.map((item) => {
-              const Icon = item.icon;
-              return <article key={item.title} className="rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-sm"><span className="flex size-11 items-center justify-center rounded-xl bg-violet-50 text-violet-700"><Icon className="size-5" /></span><h3 className="mt-8 text-xl font-black">{item.title}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{item.body}</p></article>;
-            })}
-          </div>
-          <div className="mt-8 flex flex-col items-start justify-between gap-5 rounded-[1.5rem] bg-violet-100 p-7 sm:flex-row sm:items-center">
-            <div><p className="font-black text-violet-950">Inspect what MemoryOS stores and why.</p><p className="mt-2 text-sm text-violet-900/70">Use the dashboard for API keys, users, usage, schemas, quality logs, and domain-specific views.</p></div>
-            <a href={signUpUrl("/")} className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-violet-700 px-5 text-sm font-black text-white">Create a workspace <ArrowRight className="size-4" /></a>
-          </div>
-        </div>
-      </section>
+      <ProductionFoundations />
 
       <section className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
