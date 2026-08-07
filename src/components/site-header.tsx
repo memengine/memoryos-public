@@ -56,7 +56,7 @@ function DropdownMenu({ label, columns = 1, links, dark = false }: {
             const Icon = item.icon ?? Sparkles;
             const content = (
               <span className={`flex gap-3 rounded-xl p-3 transition ${dark ? "hover:bg-white/5" : "hover:bg-slate-50"}`}>
-                <span className={`mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg ${dark ? "bg-white/10 text-violet-300" : "bg-slate-100 text-[#2E75B6]"}`}>
+                <span className={`mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg ${dark ? "bg-white/10 text-slate-300" : "bg-slate-100 text-[#2E75B6]"}`}>
                   <Icon className="size-4" />
                 </span>
                 <span>
@@ -107,7 +107,14 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
     <header className={`sticky top-0 z-50 backdrop-blur-xl ${dark ? "border-b border-white/[0.06] bg-[#030305]/85" : "border-b border-slate-200/70 bg-white/92"}`}>
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>
-          <span className={`flex size-10 items-center justify-center rounded-xl text-sm font-bold shadow-sm ${dark ? "bg-white/10 text-white" : "bg-[#0D1117] text-white"}`}>M</span>
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.08]">
+            <img
+              src={dark ? "/brand/logo-mark-dark.svg" : "/brand/logo-mark.svg"}
+              alt=""
+              aria-hidden="true"
+              className="size-6"
+            />
+          </span>
           <span className={`text-sm font-black uppercase tracking-[0.24em] ${dark ? "text-white" : "text-slate-950"}`}>MemoryOS</span>
         </Link>
 
@@ -143,20 +150,51 @@ export function SiteHeader({ dark = false }: { dark?: boolean }) {
 
       {mobileOpen ? (
         <nav id="mobile-navigation" aria-label="Mobile navigation" className={`border-t px-4 py-5 lg:hidden ${dark ? "border-white/10 bg-[#05060a]" : "border-slate-200 bg-white"}`}>
-          <div className="mx-auto grid max-w-7xl gap-2">
+          <div className="mx-auto max-w-7xl space-y-1">
+
+            {/* Main nav links */}
             {[
               ["Engines", "/#engines"],
               ["Playground", "/#playground"],
-              ["Customer Support", "/use-cases/customer-support"],
-              ["Education", "/use-cases/edtech"],
               ["Memory Passport", "/memory-passport"],
               ["Pricing", "/pricing"],
             ].map(([label, href]) => (
-              <Link key={label} href={href} onClick={() => setMobileOpen(false)} className={`rounded-xl px-3 py-3 text-sm font-bold ${dark ? "text-slate-200 hover:bg-white/5" : "text-slate-800 hover:bg-slate-50"}`}>{label}</Link>
+              <Link key={label} href={href} onClick={() => setMobileOpen(false)} className={`block rounded-xl px-3 py-3 text-sm font-bold ${dark ? "text-slate-200 hover:bg-white/5" : "text-slate-800 hover:bg-slate-50"}`}>{label}</Link>
             ))}
-            <div className="mt-3 grid grid-cols-2 gap-3 border-t pt-4 border-inherit">
-              <a href={docsHomeUrl} target="_blank" rel="noreferrer" className={`flex h-11 items-center justify-center rounded-xl border text-sm font-bold ${dark ? "border-white/10 text-white" : "border-slate-200 text-slate-800"}`}>Docs</a>
-              <a href={signUpUrl("/")} className={`flex h-11 items-center justify-center rounded-xl text-sm font-bold ${dark ? "bg-white text-black" : "bg-slate-950 text-white"}`}>Get started</a>
+
+            {/* Use Cases group */}
+            <div className={`mt-1 rounded-xl border px-3 py-2 ${dark ? "border-white/[0.06] bg-white/[0.03]" : "border-slate-100 bg-slate-50"}`}>
+              <p className={`mb-1 text-[10px] font-black uppercase tracking-[0.2em] ${dark ? "text-slate-500" : "text-slate-400"}`}>Use Cases</p>
+              {[
+                ["Customer Support", "/use-cases/customer-support"],
+                ["Education", "/use-cases/edtech"],
+              ].map(([label, href]) => (
+                <Link key={label} href={href} onClick={() => setMobileOpen(false)} className={`block rounded-lg px-2 py-2.5 text-sm font-semibold ${dark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"}`}>{label}</Link>
+              ))}
+            </div>
+
+            {/* Resources group */}
+            <div className={`rounded-xl border px-3 py-2 ${dark ? "border-white/[0.06] bg-white/[0.03]" : "border-slate-100 bg-slate-50"}`}>
+              <p className={`mb-1 text-[10px] font-black uppercase tracking-[0.2em] ${dark ? "text-slate-500" : "text-slate-400"}`}>Resources</p>
+              <a href={docsHomeUrl} target="_blank" rel="noreferrer" onClick={() => setMobileOpen(false)} className={`block rounded-lg px-2 py-2.5 text-sm font-semibold ${dark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"}`}>
+                Documentation
+              </a>
+              <Link href="/#production" onClick={() => setMobileOpen(false)} className={`block rounded-lg px-2 py-2.5 text-sm font-semibold ${dark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"}`}>
+                Security &amp; governance
+              </Link>
+              <a href={salesMailUrl()} onClick={() => setMobileOpen(false)} className={`block rounded-lg px-2 py-2.5 text-sm font-semibold ${dark ? "text-slate-300 hover:bg-white/5" : "text-slate-700 hover:bg-slate-100"}`}>
+                Talk to us
+              </a>
+            </div>
+
+            {/* CTA row */}
+            <div className={`mt-2 grid grid-cols-2 gap-3 border-t pt-4 ${dark ? "border-white/10" : "border-slate-200"}`}>
+              <a href={dashboard} className={`flex h-11 items-center justify-center rounded-xl border text-sm font-bold ${dark ? "border-white/10 text-white hover:bg-white/5" : "border-slate-200 text-slate-800 hover:bg-slate-50"}`}>
+                Dashboard
+              </a>
+              <a href={signUpUrl("/")} className={`flex h-11 items-center justify-center rounded-xl text-sm font-bold ${dark ? "bg-white text-black hover:bg-slate-200" : "bg-slate-950 text-white hover:bg-slate-800"}`}>
+                Get started
+              </a>
             </div>
           </div>
         </nav>
