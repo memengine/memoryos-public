@@ -53,7 +53,7 @@ const badgeStyles: Record<PlanName, string> = {
   starter: "border-cyan-300/30 bg-cyan-300/10 text-cyan-200",
   growth: "border-emerald-300/30 bg-emerald-300/10 text-emerald-200",
   scale: "border-blue-300/30 bg-blue-300/10 text-blue-200",
-  enterprise: "border-violet-300/30 bg-violet-300/10 text-violet-200",
+  enterprise: "border-slate-600 bg-slate-700/60 text-slate-300",
 };
 
 function formatMoney(value: number, currency: Currency) {
@@ -148,7 +148,7 @@ export function PlanCard({ billing, plan, tenantAppUrl, currency = "inr", classN
       </div>
 
       {plan.cta_type === "sales" ? (
-        <a href={salesMailUrl()} className="mt-5 flex h-11 items-center justify-center rounded-xl border border-violet-300/30 bg-violet-300/10 text-sm font-semibold text-violet-100 transition hover:bg-violet-300/15">
+        <a href={salesMailUrl()} className="mt-5 flex h-11 items-center justify-center rounded-xl border border-white/20 bg-white/[0.06] text-sm font-semibold text-slate-200 transition hover:bg-white/[0.10]">
           Talk to sales
         </a>
       ) : (

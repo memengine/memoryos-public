@@ -30,12 +30,12 @@ type DomainPageProps = {
 
 const accents = {
   violet: {
-    badge: "border-violet-300/25 bg-violet-500/10 text-violet-100",
-    icon: "bg-violet-500/15 text-violet-100 ring-violet-300/20",
-    button: "bg-violet-600 hover:bg-violet-500 shadow-violet-950/40",
-    text: "text-violet-300",
-    soft: "border-violet-300/20 bg-violet-500/10",
-    glow: "rgba(124,58,237,0.26)",
+    badge: "border-slate-400/25 bg-slate-500/10 text-slate-100",
+    icon: "bg-slate-500/15 text-slate-100 ring-slate-400/20",
+    button: "bg-white hover:bg-slate-100 shadow-black/40 text-slate-950",
+    text: "text-slate-300",
+    soft: "border-slate-400/20 bg-slate-500/10",
+    glow: "rgba(100,116,139,0.18)",
   },
   amber: {
     badge: "border-amber-300/25 bg-amber-500/10 text-amber-100",
@@ -136,7 +136,7 @@ export function MarketingDomainShell({
       <SiteHeader dark />
 
       <section className="relative px-4 py-24 sm:px-6 lg:px-8 lg:py-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(124,58,237,0.14),transparent_32%),linear-gradient(180deg,#050506_0%,#09090b_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#050506_0%,#09090b_100%)]" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.92fr_1.08fr]">
           <div>
             <div className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-black uppercase tracking-[0.22em] ${a.badge}`}>
