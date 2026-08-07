@@ -46,7 +46,7 @@ const addons = [
 
 export function CrossAgentAddons() {
   return (
-    <section className="border-t border-purple-500/40 bg-[#0D1117] px-4 py-20 text-white shadow-[inset_0_1px_28px_rgba(168,85,247,0.18)] sm:px-6 lg:px-8">
+    <section className="border-t border-white/10 bg-[#0D1117] px-4 py-20 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -64,7 +64,7 @@ export function CrossAgentAddons() {
             return (
               <article
                 key={addon.title}
-                className="rounded-2xl border border-[#30363D] bg-[#161B22] p-6"
+                className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"
               >
                 <Icon className="size-9 text-sky-200" aria-hidden="true" />
                 <h3 className="mt-5 text-xl font-bold text-white">{addon.title}</h3>
@@ -90,7 +90,7 @@ export function CrossAgentAddons() {
                       ? salesMailUrl()
                       : addon.href
                 }
-                  className="mt-7 flex h-10 items-center justify-center rounded-xl border border-[#2E75B6]/60 bg-[#2E75B6]/15 text-sm font-semibold text-sky-100 transition hover:bg-[#2E75B6]/25"
+                  className="mt-7 flex h-10 items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] text-sm font-semibold text-slate-200 transition hover:bg-white/[0.10]"
                 >
                   {addon.cta}
                 </Link>
@@ -99,7 +99,7 @@ export function CrossAgentAddons() {
           })}
         </div>
 
-        <pre className="mt-10 overflow-x-auto rounded-2xl border border-[#30363D] bg-[#05080D] p-6 text-sm leading-7 text-slate-300">
+        <pre className="mt-10 overflow-x-auto rounded-2xl border border-white/10 bg-[#05080D] p-6 text-sm leading-7 text-slate-300">
           <code>{`// Give users a URL to grant your agent access
 const url = UniversalMemory.consentUrl({
   agentId: "your-agent-id",
