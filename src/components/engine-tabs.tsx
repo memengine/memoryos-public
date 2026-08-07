@@ -81,7 +81,7 @@ const engines: Array<{
     description:
       "Consent pages, grants, pending questions, and revocation give shared memory a trust layer.",
     icon: Network,
-    accent: "from-violet-500 to-fuchsia-400",
+    accent: "from-slate-600 to-slate-500",
     points: ["consent URL", "category access", "verified agents", "user revocation"],
     memories: [
       "Skills and knowledge shared with coding agent",
@@ -141,7 +141,7 @@ function EngineContent({ active }: { active: Engine }) {
       </div>
 
       <div className="relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-[#0D1117] p-6 text-white">
-        <div className="absolute inset-0 opacity-40 [background-image:radial-gradient(circle_at_20%_20%,#2E75B6_0,transparent_25%),radial-gradient(circle_at_80%_0%,#8B5CF6_0,transparent_22%),radial-gradient(circle_at_65%_85%,#10B981_0,transparent_20%)]" />
+        <div className="absolute inset-0 opacity-40 [background-image:radial-gradient(circle_at_20%_20%,#2E75B6_0,transparent_25%),radial-gradient(circle_at_80%_0%,#0ea5e9_0,transparent_22%),radial-gradient(circle_at_65%_85%,#10B981_0,transparent_20%)]" />
         <div className="relative">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div><div className="text-sm font-bold text-slate-400">Live memory context</div><div className="mt-1 font-mono text-xs text-slate-500">engine: {active.key}</div></div>

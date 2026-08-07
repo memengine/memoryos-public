@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Check, ChevronLeft, ChevronRight, Copy, Fingerprint, Globe2, KeyRound, LayoutDashboard, Link2, MousePointer2, Pause, Play, ShieldCheck, Sparkles, UserRoundPlus, UsersRound, Waypoints } from "lucide-react";
+import { Check, Copy, Fingerprint, Globe2, KeyRound, Link2, MousePointer2, ShieldCheck, UsersRound, Waypoints } from "lucide-react";
 
 const scenes = [
   { label: "Domain", title: "Choose the right memory engine", detail: "Start general or activate an EdTech or Customer Support schema.", icon: Globe2, origin: "70% 56%" },
@@ -11,55 +11,304 @@ const scenes = [
 ] as const;
 
 function WindowChrome({ title, children }: { title: string; children: React.ReactNode }) {
-  return <div className="h-full overflow-hidden rounded-2xl border border-white/10 bg-[#0b1220]/95 shadow-2xl shadow-slate-950/40"><div className="flex h-10 items-center justify-between border-b border-white/10 px-4"><div className="flex gap-1.5"><span className="size-2 rounded-full bg-rose-400" /><span className="size-2 rounded-full bg-amber-300" /><span className="size-2 rounded-full bg-emerald-300" /></div><span className="font-mono text-[9px] text-slate-500">{title}</span><span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(103,232,249,0.8)]" /></div>{children}</div>;
+  return (
+    <div className="h-full overflow-hidden rounded-2xl border border-white/10 bg-[#0b1220]/95 shadow-2xl shadow-slate-950/40">
+      <div className="flex h-10 items-center justify-between border-b border-white/10 px-4">
+        <div className="flex gap-1.5">
+          <span className="size-2 rounded-full bg-rose-400" />
+          <span className="size-2 rounded-full bg-amber-300" />
+          <span className="size-2 rounded-full bg-emerald-300" />
+        </div>
+        <span className="font-mono text-[9px] text-slate-500">{title}</span>
+        <span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(103,232,249,0.8)]" />
+      </div>
+      {children}
+    </div>
+  );
 }
 
 function DemoSidebar({ selected }: { selected: string }) {
-  return <aside className="hidden w-28 shrink-0 border-r border-white/10 bg-[#080d17] p-2 sm:block"><div className="mb-4 flex items-center gap-2 px-2 py-2"><span className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-cyan-400 text-[10px] font-black text-white">M</span><span className="text-[9px] font-bold text-white">MemoryOS</span></div>{["Overview", "Sources", "Conflicts", "Passport"].map((item) => <div key={item} className={`mb-1 rounded-lg px-2 py-2 text-[9px] font-semibold ${selected === item ? "bg-gradient-to-r from-violet-500/30 to-cyan-400/15 text-cyan-100 ring-1 ring-cyan-300/20" : "text-slate-500"}`}>{item}</div>)}</aside>;
+  return (
+    <aside className="hidden w-28 shrink-0 border-r border-white/10 bg-[#080d17] p-2 sm:block">
+      <div className="mb-4 flex items-center gap-2 px-2 py-2">
+        <span className="flex size-7 items-center justify-center rounded-lg bg-white/10 text-[10px] font-black text-white">M</span>
+        <span className="text-[9px] font-bold text-white">MemoryOS</span>
+      </div>
+      {["Overview", "Sources", "Conflicts", "Passport"].map((item) => (
+        <div key={item} className={`mb-1 rounded-lg px-2 py-2 text-[9px] font-semibold ${selected === item ? "bg-white/[0.12] text-white ring-1 ring-white/15" : "text-slate-500"}`}>{item}</div>
+      ))}
+    </aside>
+  );
 }
 
 function Pointer({ className }: { className: string }) {
-  return <div className={`tour-pointer ${className}`}><MousePointer2 className="size-6 fill-white text-slate-950 drop-shadow-lg" /><span className="tour-click-ring" /></div>;
+  return (
+    <div className={`tour-pointer ${className}`}>
+      <MousePointer2 className="size-6 fill-white text-slate-950 drop-shadow-lg" />
+      <span className="tour-click-ring" />
+    </div>
+  );
 }
 
 function WorkspaceScene() {
-  return <WindowChrome title="app.memoryo.dev/workspaces/new"><div className="flex h-[calc(100%_-_2.5rem)]"><DemoSidebar selected="Overview" /><div className="relative flex-1 overflow-hidden bg-[radial-gradient(circle_at_15%_0%,rgba(139,92,246,0.22),transparent_35%),#0e1726] p-4"><div className="mb-4 flex items-center justify-between"><div><p className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Tenant setup</p><h4 className="mt-1 text-lg font-bold text-white">Create workspace</h4></div><span className="rounded-full bg-emerald-300/10 px-2 py-1 text-[8px] font-bold text-emerald-300">Secure tenant boundary</span></div><div className="grid gap-3 md:grid-cols-[1.05fr_.95fr]"><div className="rounded-xl border border-white/10 bg-white/[0.055] p-4"><label className="text-[9px] font-semibold text-slate-400">Workspace name</label><div className="mt-2 rounded-lg border border-cyan-300/35 bg-black/20 px-3 py-2.5 text-xs font-semibold text-white"><span className="tour-type">Study Buddy Production</span></div><label className="mt-3 block text-[9px] font-semibold text-slate-400">Memory engine</label><div className="mt-2 flex gap-2"><span className="rounded-lg bg-violet-500/25 px-3 py-2 text-[9px] font-bold text-violet-100 ring-1 ring-violet-300/25">General</span><span className="rounded-lg bg-white/[0.04] px-3 py-2 text-[9px] text-slate-500">EdTech</span></div><button className="mt-4 rounded-lg bg-gradient-to-r from-violet-500 to-cyan-400 px-4 py-2.5 text-[10px] font-bold text-white shadow-lg shadow-violet-500/20">Create workspace</button></div><div className="grid grid-cols-2 gap-2"><div className="rounded-xl border border-white/10 bg-white/[0.04] p-3"><span className="text-[8px] text-slate-500">Region</span><p className="mt-2 text-sm font-bold text-white">IN1</p></div><div className="rounded-xl border border-white/10 bg-white/[0.04] p-3"><span className="text-[8px] text-slate-500">Isolation</span><p className="mt-2 text-sm font-bold text-emerald-300">Ready</p></div><div className="col-span-2 rounded-xl border border-white/10 bg-gradient-to-br from-cyan-300/10 to-violet-500/10 p-3"><span className="text-[8px] text-slate-500">Setup outcome</span><p className="mt-2 text-xs font-bold text-white">Workspace, schema, and quotas initialized.</p></div></div></div><Pointer className="pointer-workspace" /><div className="tour-success-toast"><Check className="size-3.5" /> Workspace created</div></div></div></WindowChrome>;
+  return (
+    <WindowChrome title="app.memoryo.dev/workspaces/new">
+      <div className="flex h-[calc(100%_-_2.5rem)]">
+        <DemoSidebar selected="Overview" />
+        <div className="relative flex-1 overflow-hidden bg-[#0e1726] p-4">
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <p className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Tenant setup</p>
+              <h4 className="mt-1 text-lg font-bold text-white">Create workspace</h4>
+            </div>
+            <span className="rounded-full bg-emerald-300/10 px-2 py-1 text-[8px] font-bold text-emerald-300">Secure tenant boundary</span>
+          </div>
+          <div className="grid gap-3 md:grid-cols-[1.05fr_.95fr]">
+            <div className="rounded-xl border border-white/10 bg-white/[0.055] p-4">
+              <label className="text-[9px] font-semibold text-slate-400">Workspace name</label>
+              <div className="mt-2 rounded-lg border border-cyan-300/35 bg-black/20 px-3 py-2.5 text-xs font-semibold text-white"><span className="tour-type">Study Buddy Production</span></div>
+              <label className="mt-3 block text-[9px] font-semibold text-slate-400">Memory engine</label>
+              <div className="mt-2 flex gap-2">
+                <span className="rounded-lg bg-white/[0.12] px-3 py-2 text-[9px] font-bold text-white ring-1 ring-white/20">General</span>
+                <span className="rounded-lg bg-white/[0.04] px-3 py-2 text-[9px] text-slate-500">EdTech</span>
+              </div>
+              <button className="mt-4 rounded-lg bg-white px-4 py-2.5 text-[10px] font-bold text-slate-950">Create workspace</button>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3"><span className="text-[8px] text-slate-500">Region</span><p className="mt-2 text-sm font-bold text-white">IN1</p></div>
+              <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3"><span className="text-[8px] text-slate-500">Isolation</span><p className="mt-2 text-sm font-bold text-emerald-300">Ready</p></div>
+              <div className="col-span-2 rounded-xl border border-white/10 bg-white/[0.06] p-3"><span className="text-[8px] text-slate-500">Setup outcome</span><p className="mt-2 text-xs font-bold text-white">Workspace, schema, and quotas initialized.</p></div>
+            </div>
+          </div>
+          <Pointer className="pointer-workspace" />
+          <div className="tour-success-toast"><Check className="size-3.5" /> Workspace created</div>
+        </div>
+      </div>
+    </WindowChrome>
+  );
 }
 
 function ApiKeyScene() {
-  return <WindowChrome title="app.memoryo.dev/api-keys"><div className="flex h-[calc(100%_-_2.5rem)]"><DemoSidebar selected="API Keys" /><div className="relative flex-1 bg-[radial-gradient(circle_at_90%_10%,rgba(34,211,238,0.18),transparent_36%),#0e1726] p-4"><div className="mb-3"><p className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Backend access</p><h4 className="mt-1 text-lg font-bold text-white">Create API key</h4></div><div className="mx-auto max-w-sm rounded-2xl border border-white/15 bg-[#111b2c] p-4 shadow-2xl"><label className="text-[9px] font-semibold text-slate-400">Key name</label><div className="mt-2 rounded-lg border border-cyan-300/35 bg-black/25 px-3 py-2.5 text-xs text-white"><span className="tour-type">study-buddy-backend</span></div><p className="mt-3 text-[9px] font-semibold text-slate-400">Permissions</p><div className="mt-2 grid grid-cols-2 gap-2">{["Read", "Write", "Delete", "Admin"].map((scope, index) => <div key={scope} className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-[9px] ${index < 2 ? "border-cyan-300/30 bg-cyan-300/10 text-cyan-100" : "border-white/10 text-slate-500"}`}><span className={`flex size-3.5 items-center justify-center rounded ${index < 2 ? "bg-cyan-300 text-slate-950" : "border border-slate-600"}`}>{index < 2 ? <Check className="size-2.5" /> : null}</span>{scope}</div>)}</div><button className="mt-4 w-full rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 py-2.5 text-[10px] font-bold text-slate-950">Create secure key</button></div><Pointer className="pointer-api" /><div className="tour-success-toast"><KeyRound className="size-3.5" /> mem_demo_8H3K…P7Q2 created</div></div></div></WindowChrome>;
+  return (
+    <WindowChrome title="app.memoryo.dev/api-keys">
+      <div className="flex h-[calc(100%_-_2.5rem)]">
+        <DemoSidebar selected="API Keys" />
+        <div className="relative flex-1 bg-[radial-gradient(circle_at_90%_10%,rgba(34,211,238,0.18),transparent_36%),#0e1726] p-4">
+          <div className="mb-3"><p className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Backend access</p><h4 className="mt-1 text-lg font-bold text-white">Create API key</h4></div>
+          <div className="mx-auto max-w-sm rounded-2xl border border-white/15 bg-[#111b2c] p-4 shadow-2xl">
+            <label className="text-[9px] font-semibold text-slate-400">Key name</label>
+            <div className="mt-2 rounded-lg border border-cyan-300/35 bg-black/25 px-3 py-2.5 text-xs text-white"><span className="tour-type">study-buddy-backend</span></div>
+            <p className="mt-3 text-[9px] font-semibold text-slate-400">Permissions</p>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              {["Read", "Write", "Delete", "Admin"].map((scope, index) => (
+                <div key={scope} className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-[9px] ${index < 2 ? "border-cyan-300/30 bg-cyan-300/10 text-cyan-100" : "border-white/10 text-slate-500"}`}>
+                  <span className={`flex size-3.5 items-center justify-center rounded ${index < 2 ? "bg-cyan-300 text-slate-950" : "border border-slate-600"}`}>{index < 2 ? <Check className="size-2.5" /> : null}</span>
+                  {scope}
+                </div>
+              ))}
+            </div>
+            <button className="mt-4 w-full rounded-lg bg-gradient-to-r from-cyan-400 to-blue-500 py-2.5 text-[10px] font-bold text-slate-950">Create secure key</button>
+          </div>
+          <Pointer className="pointer-api" />
+          <div className="tour-success-toast"><KeyRound className="size-3.5" /> mem_demo_8H3K…P7Q2 created</div>
+        </div>
+      </div>
+    </WindowChrome>
+  );
 }
 
 function AgentScene() {
-  return <WindowChrome title="app.memoryo.dev/memory-passport/agents"><div className="flex h-[calc(100%_-_2.5rem)]"><DemoSidebar selected="Passport" /><div className="relative flex-1 overflow-hidden bg-[radial-gradient(circle_at_8%_90%,rgba(168,85,247,0.24),transparent_38%),#0e1726] p-4"><div className="mb-3 flex items-center justify-between"><div><p className="text-[9px] font-bold uppercase tracking-wider text-violet-300">Memory Passport</p><h4 className="mt-1 text-lg font-bold text-white">Create agent identity</h4></div><Fingerprint className="size-6 text-violet-300" /></div><div className="rounded-xl border border-white/10 bg-white/[0.05] p-3"><div className="grid grid-cols-2 gap-2"><div><span className="text-[8px] text-slate-500">Agent name</span><div className="mt-1 rounded-md border border-violet-300/30 bg-black/20 px-2.5 py-2 text-[9px] font-semibold text-white"><span className="tour-type">Study Buddy</span></div></div><div><span className="text-[8px] text-slate-500">Website URL</span><div className="mt-1 truncate rounded-md border border-violet-300/30 bg-black/20 px-2.5 py-2 text-[9px] text-cyan-200"><span className="tour-type tour-type-delay">https://studybuddy.ai</span></div></div></div><span className="mt-2 block text-[8px] text-slate-500">Description</span><div className="mt-1 rounded-md border border-white/10 bg-black/20 px-2.5 py-2 text-[9px] text-slate-300">An AI tutor that uses user-approved shared memory.</div><p className="mt-2 text-[8px] text-slate-500">Default categories</p><div className="mt-1.5 flex flex-wrap gap-1.5">{["Preferences", "Facts", "Goals", "Expertise"].map((item, index) => <span key={item} className={`rounded-md px-2 py-1.5 text-[8px] font-semibold ${index < 3 ? "bg-gradient-to-r from-violet-500/30 to-cyan-400/20 text-cyan-100 ring-1 ring-cyan-300/20" : "bg-white/[0.05] text-slate-500"}`}>{item}</span>)}</div><button className="mt-3 rounded-lg bg-gradient-to-r from-violet-500 to-fuchsia-500 px-4 py-2.5 text-[10px] font-bold text-white">Create agent identity</button></div><Pointer className="pointer-agent" /><div className="tour-success-toast"><Check className="size-3.5" /> Study Buddy verified</div></div></div></WindowChrome>;
+  return (
+    <WindowChrome title="app.memoryo.dev/memory-passport/agents">
+      <div className="flex h-[calc(100%_-_2.5rem)]">
+        <DemoSidebar selected="Passport" />
+        <div className="relative flex-1 overflow-hidden bg-[#0e1726] p-4">
+          <div className="mb-3 flex items-center justify-between">
+            <div>
+              <p className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Memory Passport</p>
+              <h4 className="mt-1 text-lg font-bold text-white">Create agent identity</h4>
+            </div>
+            <Fingerprint className="size-6 text-cyan-300" />
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/[0.05] p-3">
+            <div className="grid grid-cols-2 gap-2">
+              <div><span className="text-[8px] text-slate-500">Agent name</span><div className="mt-1 rounded-md border border-white/15 bg-black/20 px-2.5 py-2 text-[9px] font-semibold text-white"><span className="tour-type">Study Buddy</span></div></div>
+              <div><span className="text-[8px] text-slate-500">Website URL</span><div className="mt-1 truncate rounded-md border border-white/15 bg-black/20 px-2.5 py-2 text-[9px] text-cyan-200"><span className="tour-type tour-type-delay">https://studybuddy.ai</span></div></div>
+            </div>
+            <span className="mt-2 block text-[8px] text-slate-500">Description</span>
+            <div className="mt-1 rounded-md border border-white/10 bg-black/20 px-2.5 py-2 text-[9px] text-slate-300">An AI tutor that uses user-approved shared memory.</div>
+            <p className="mt-2 text-[8px] text-slate-500">Default categories</p>
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
+              {["Preferences", "Facts", "Goals", "Expertise"].map((item, index) => (
+                <span key={item} className={`rounded-md px-2 py-1.5 text-[8px] font-semibold ${index < 3 ? "bg-white/[0.12] text-white ring-1 ring-white/20" : "bg-white/[0.05] text-slate-500"}`}>{item}</span>
+              ))}
+            </div>
+            <button className="mt-3 rounded-lg bg-white px-4 py-2.5 text-[10px] font-bold text-slate-950">Create agent identity</button>
+          </div>
+          <Pointer className="pointer-agent" />
+          <div className="tour-success-toast"><Check className="size-3.5" /> Study Buddy verified</div>
+        </div>
+      </div>
+    </WindowChrome>
+  );
 }
 
 function ConsentScene() {
-  return <WindowChrome title="app.memoryo.dev/memory-passport/consent"><div className="relative h-[calc(100%_-_2.5rem)] overflow-hidden bg-[radial-gradient(circle_at_80%_20%,rgba(59,130,246,0.22),transparent_40%),#0e1726] p-4"><div className="mb-3 flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-cyan-300/15 text-cyan-300"><Link2 className="size-4" /></span><div><p className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Permission link</p><h4 className="text-base font-bold text-white">Create consent URL</h4></div></div><div className="grid gap-3 md:grid-cols-[.8fr_1.2fr]"><div className="rounded-xl border border-white/10 bg-white/[0.04] p-3"><span className="text-[8px] text-slate-500">Callback URL</span><div className="mt-1.5 break-all rounded-lg border border-white/10 bg-black/20 p-2.5 text-[8px] leading-4 text-cyan-100">https://studybuddy.ai/memory/callback</div><span className="mt-3 block text-[8px] text-slate-500">State</span><div className="mt-1.5 rounded-lg border border-white/10 bg-black/20 p-2.5 text-[9px] text-slate-300">user_session_1842</div></div><div className="rounded-xl border border-white/10 bg-white/[0.04] p-3"><p className="text-[8px] text-slate-500">Requested categories</p><div className="mt-2 flex gap-1.5">{["Preferences", "Facts", "Goals"].map((item) => <span key={item} className="rounded-md bg-cyan-300/10 px-2 py-1.5 text-[8px] font-semibold text-cyan-100 ring-1 ring-cyan-300/25">{item}</span>)}</div><code className="mt-3 block overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-black/35 p-3 text-[8px] text-cyan-200">https://app.memoryo.dev/consent?agent_id=study-buddy&amp;categories=preferences,facts,goals</code><button className="mt-3 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-400 px-3 py-2 text-[9px] font-bold text-slate-950"><Copy className="size-3" /> Copy consent URL</button></div></div><Pointer className="pointer-consent" /><div className="tour-success-toast"><Check className="size-3.5" /> Consent link copied</div></div></WindowChrome>;
+  return (
+    <WindowChrome title="app.memoryo.dev/memory-passport/consent">
+      <div className="relative h-[calc(100%_-_2.5rem)] overflow-hidden bg-[#0e1726] p-4">
+        <div className="mb-3 flex items-center gap-3">
+          <span className="flex size-9 items-center justify-center rounded-xl bg-cyan-300/15 text-cyan-300"><Link2 className="size-4" /></span>
+          <div><p className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Permission link</p><h4 className="text-base font-bold text-white">Create consent URL</h4></div>
+        </div>
+        <div className="grid gap-3 md:grid-cols-[.8fr_1.2fr]">
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
+            <span className="text-[8px] text-slate-500">Callback URL</span>
+            <div className="mt-1.5 break-all rounded-lg border border-white/10 bg-black/20 p-2.5 text-[8px] leading-4 text-cyan-100">https://studybuddy.ai/memory/callback</div>
+            <span className="mt-3 block text-[8px] text-slate-500">State</span>
+            <div className="mt-1.5 rounded-lg border border-white/10 bg-black/20 p-2.5 text-[9px] text-slate-300">user_session_1842</div>
+          </div>
+          <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
+            <p className="text-[8px] text-slate-500">Requested categories</p>
+            <div className="mt-2 flex gap-1.5">{["Preferences", "Facts", "Goals"].map((item) => <span key={item} className="rounded-md bg-cyan-300/10 px-2 py-1.5 text-[8px] font-semibold text-cyan-100 ring-1 ring-cyan-300/25">{item}</span>)}</div>
+            <code className="mt-3 block overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-black/35 p-3 text-[8px] text-cyan-200">https://app.memoryo.dev/consent?agent_id=study-buddy&amp;categories=preferences,facts,goals</code>
+            <button className="mt-3 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-400 px-3 py-2 text-[9px] font-bold text-slate-950"><Copy className="size-3" /> Copy consent URL</button>
+          </div>
+        </div>
+        <Pointer className="pointer-consent" />
+        <div className="tour-success-toast"><Check className="size-3.5" /> Consent link copied</div>
+      </div>
+    </WindowChrome>
+  );
 }
 
 function ApproveScene() {
-  return <WindowChrome title="passport.memoryo.dev/consent"><div className="relative h-[calc(100%_-_2.5rem)] overflow-hidden bg-[radial-gradient(circle_at_20%_20%,rgba(124,58,237,0.28),transparent_42%),#0e1726] p-4"><div className="grid h-full gap-3 md:grid-cols-[1.15fr_.85fr]"><div className="rounded-xl border border-white/10 bg-white/[0.05] p-4"><div className="flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-cyan-400 text-xs font-black">SB</span><div><p className="text-sm font-bold text-white">Study Buddy</p><p className="text-[8px] text-slate-500">Verified by MemoryOS · studybuddy.ai</p></div></div><p className="mt-4 text-[10px] font-bold text-white">This app is requesting access to:</p><div className="mt-2 grid grid-cols-2 gap-2">{["Preferences", "Facts", "Goals", "Expertise"].map((item, index) => <div key={item} className={`rounded-lg border p-2.5 ${index < 3 ? "border-emerald-300/30 bg-emerald-300/10" : "border-white/10 bg-black/15"}`}><span className={`text-[8px] font-bold ${index < 3 ? "text-emerald-200" : "text-slate-500"}`}>{index < 3 ? "Allowed" : "Optional"}</span><p className="mt-1 text-[9px] font-semibold text-white">{item}</p></div>)}</div><button className="mt-3 w-full rounded-lg bg-gradient-to-r from-emerald-300 to-cyan-300 py-2.5 text-[10px] font-bold text-slate-950">Approve selected access</button></div><div className="rounded-xl bg-gradient-to-br from-[#111b35] to-[#070b15] p-4 ring-1 ring-white/10"><ShieldCheck className="size-6 text-cyan-300" /><p className="mt-5 text-lg font-bold leading-tight text-white">Your memory stays private.</p><p className="mt-3 text-[9px] leading-4 text-slate-400">Access is read-only, category-scoped, time-limited, and revocable anytime.</p><div className="mt-4 rounded-lg border border-white/10 bg-white/[0.04] p-3"><span className="text-[8px] text-slate-500">After approval</span><p className="mt-1 text-[10px] font-bold text-emerald-300">3 categories connected</p></div></div></div><Pointer className="pointer-approve" /><div className="tour-success-toast"><Check className="size-3.5" /> Access granted · user remains in control</div></div></WindowChrome>;
+  return (
+    <WindowChrome title="passport.memoryo.dev/consent">
+      <div className="relative h-[calc(100%_-_2.5rem)] overflow-hidden bg-[#0e1726] p-4">
+        <div className="grid h-full gap-3 md:grid-cols-[1.15fr_.85fr]">
+          <div className="rounded-xl border border-white/10 bg-white/[0.05] p-4">
+            <div className="flex items-center gap-3">
+              <span className="flex size-10 items-center justify-center rounded-xl bg-white/10 text-xs font-black text-white">SB</span>
+              <div><p className="text-sm font-bold text-white">Study Buddy</p><p className="text-[8px] text-slate-500">Verified by MemoryOS · studybuddy.ai</p></div>
+            </div>
+            <p className="mt-4 text-[10px] font-bold text-white">This app is requesting access to:</p>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              {["Preferences", "Facts", "Goals", "Expertise"].map((item, index) => (
+                <div key={item} className={`rounded-lg border p-2.5 ${index < 3 ? "border-emerald-300/30 bg-emerald-300/10" : "border-white/10 bg-black/15"}`}>
+                  <span className={`text-[8px] font-bold ${index < 3 ? "text-emerald-200" : "text-slate-500"}`}>{index < 3 ? "Allowed" : "Optional"}</span>
+                  <p className="mt-1 text-[9px] font-semibold text-white">{item}</p>
+                </div>
+              ))}
+            </div>
+            <button className="mt-3 w-full rounded-lg bg-gradient-to-r from-emerald-300 to-cyan-300 py-2.5 text-[10px] font-bold text-slate-950">Approve selected access</button>
+          </div>
+          <div className="rounded-xl bg-[#111b35] p-4 ring-1 ring-white/10">
+            <ShieldCheck className="size-6 text-cyan-300" />
+            <p className="mt-5 text-lg font-bold leading-tight text-white">Your memory stays private.</p>
+            <p className="mt-3 text-[9px] leading-4 text-slate-400">Access is read-only, category-scoped, time-limited, and revocable anytime.</p>
+            <div className="mt-4 rounded-lg border border-white/10 bg-white/[0.04] p-3">
+              <span className="text-[8px] text-slate-500">After approval</span>
+              <p className="mt-1 text-[10px] font-bold text-emerald-300">3 categories connected</p>
+            </div>
+          </div>
+        </div>
+        <Pointer className="pointer-approve" />
+        <div className="tour-success-toast"><Check className="size-3.5" /> Access granted · user remains in control</div>
+      </div>
+    </WindowChrome>
+  );
 }
 
 function DomainPreviewScene() {
-  return <WindowChrome title="app.memoryo.dev/select-domain"><div className="relative h-[calc(100%_-_2.5rem)] overflow-hidden bg-[#eef3f8]"><img src="/product-tour/domain-selection.png" alt="MemoryOS domain selection" className="size-full object-cover object-top" /><div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent" /><div className="absolute right-[4%] top-[24%] h-[62%] w-[31%] rounded-2xl border-2 border-amber-400 shadow-[0_0_0_8px_rgba(251,191,36,.18)]" /><Pointer className="pointer-domain-preview" /><div className="tour-success-toast"><Check className="size-3.5" /> Customer Support schema selected</div></div></WindowChrome>;
+  return (
+    <WindowChrome title="app.memoryo.dev/select-domain">
+      <div className="relative h-[calc(100%_-_2.5rem)] overflow-hidden bg-[#eef3f8]">
+        <img src="/product-tour/domain-selection.png" alt="MemoryOS domain selection" className="size-full object-cover object-top" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent" />
+        <div className="absolute right-[4%] top-[24%] h-[62%] w-[31%] rounded-2xl border-2 border-amber-400 shadow-[0_0_0_8px_rgba(251,191,36,.18)]" />
+        <Pointer className="pointer-domain-preview" />
+        <div className="tour-success-toast"><Check className="size-3.5" /> Customer Support schema selected</div>
+      </div>
+    </WindowChrome>
+  );
 }
 
 function WritersPreviewScene() {
   const writers = [
     { name: "Billing Agent", service: "billing-service", authority: 90, key: "mos_live_bill…91A", color: "from-emerald-400 to-cyan-400" },
-    { name: "Support Copilot", service: "support-copilot", authority: 50, key: "mos_live_supp…42K", color: "from-violet-500 to-fuchsia-400" },
+    { name: "Support Copilot", service: "support-copilot", authority: 50, key: "mos_live_supp…42K", color: "from-slate-400 to-slate-500" },
   ];
-  return <WindowChrome title="app.memoryo.dev/sources"><div className="flex h-[calc(100%_-_2.5rem)]"><DemoSidebar selected="Sources" /><div className="relative flex-1 overflow-hidden bg-[radial-gradient(circle_at_80%_10%,rgba(34,211,238,.18),transparent_36%),#0e1726] p-4"><p className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Multi-service provenance</p><h4 className="mt-1 text-lg font-bold text-white">Production service writers</h4><div className="mt-4 grid gap-3 sm:grid-cols-2">{writers.map((writer) => <div key={writer.service} className="rounded-2xl border border-white/10 bg-white/[0.055] p-4"><div className="flex items-center justify-between"><span className={`flex size-9 items-center justify-center rounded-xl bg-gradient-to-br ${writer.color} text-xs font-black text-slate-950`}>{writer.name.charAt(0)}</span><span className="rounded-full bg-emerald-300/10 px-2 py-1 text-[8px] font-bold text-emerald-300">ACTIVE</span></div><p className="mt-3 text-xs font-bold text-white">{writer.name}</p><p className="text-[8px] text-slate-500">{writer.service}</p><div className="mt-3 grid grid-cols-2 gap-2"><div className="rounded-lg bg-black/20 p-2"><span className="text-[7px] uppercase text-slate-500">Authority</span><p className="mt-1 text-lg font-black text-cyan-300">{writer.authority}</p></div><div className="rounded-lg bg-black/20 p-2"><span className="text-[7px] uppercase text-slate-500">Dedicated key</span><p className="mt-2 truncate font-mono text-[8px] text-violet-200">{writer.key}</p></div></div></div>)}</div><Pointer className="pointer-writers-preview" /><div className="tour-success-toast"><Check className="size-3.5" /> Two isolated writers connected</div></div></div></WindowChrome>;
+  return (
+    <WindowChrome title="app.memoryo.dev/sources">
+      <div className="flex h-[calc(100%_-_2.5rem)]">
+        <DemoSidebar selected="Sources" />
+        <div className="relative flex-1 overflow-hidden bg-[#0e1726] p-4">
+          <p className="text-[9px] font-bold uppercase tracking-wider text-cyan-300">Multi-service provenance</p>
+          <h4 className="mt-1 text-lg font-bold text-white">Production service writers</h4>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {writers.map((writer) => (
+              <div key={writer.service} className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
+                <div className="flex items-center justify-between">
+                  <span className={`flex size-9 items-center justify-center rounded-xl bg-gradient-to-br ${writer.color} text-xs font-black text-slate-950`}>{writer.name.charAt(0)}</span>
+                  <span className="rounded-full bg-emerald-300/10 px-2 py-1 text-[8px] font-bold text-emerald-300">ACTIVE</span>
+                </div>
+                <p className="mt-3 text-xs font-bold text-white">{writer.name}</p>
+                <p className="text-[8px] text-slate-500">{writer.service}</p>
+                <div className="mt-3 grid grid-cols-2 gap-2">
+                  <div className="rounded-lg bg-black/20 p-2"><span className="text-[7px] uppercase text-slate-500">Authority</span><p className="mt-1 text-lg font-black text-cyan-300">{writer.authority}</p></div>
+                  <div className="rounded-lg bg-black/20 p-2"><span className="text-[7px] uppercase text-slate-500">Dedicated key</span><p className="mt-2 truncate font-mono text-[8px] text-slate-300">{writer.key}</p></div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <Pointer className="pointer-writers-preview" />
+          <div className="tour-success-toast"><Check className="size-3.5" /> Two isolated writers connected</div>
+        </div>
+      </div>
+    </WindowChrome>
+  );
 }
 
 function ConflictPreviewScene() {
-  return <WindowChrome title="app.memoryo.dev/conflicts"><div className="relative h-[calc(100%_-_2.5rem)] overflow-hidden bg-[radial-gradient(circle_at_50%_10%,rgba(244,63,94,.16),transparent_36%),#0e1726] p-4"><p className="text-center text-[9px] font-bold uppercase tracking-[.2em] text-cyan-300">Conflict intelligence</p><h4 className="mt-1 text-center text-lg font-bold text-white">Two writers disagree</h4><div className="mx-auto mt-4 grid max-w-lg items-center gap-2 sm:grid-cols-[1fr_auto_1fr]"><div className="rounded-xl border border-emerald-300/30 bg-emerald-300/[0.07] p-3"><div className="flex justify-between"><p className="text-[9px] font-bold text-white">Billing Agent</p><span className="text-[8px] font-bold text-emerald-300">90</span></div><p className="mt-3 rounded-lg bg-black/20 p-2 text-[10px] font-semibold text-white">Plan is Pro</p></div><span className="justify-self-center text-[9px] font-black text-rose-300">VS</span><div className="rounded-xl border border-violet-300/30 bg-violet-300/[0.07] p-3"><div className="flex justify-between"><p className="text-[9px] font-bold text-white">Support Copilot</p><span className="text-[8px] font-bold text-violet-300">50</span></div><p className="mt-3 rounded-lg bg-black/20 p-2 text-[10px] font-semibold text-white">Plan is Starter</p></div></div><div className="mx-auto mt-4 flex max-w-sm items-center gap-3 rounded-xl border border-emerald-300/25 bg-emerald-300/10 p-3"><Check className="size-5 shrink-0 text-emerald-300" /><div><p className="text-[10px] font-bold text-emerald-200">Resolved: Plan is Pro</p><p className="mt-0.5 text-[8px] text-slate-400">Higher category authority + direct billing evidence</p></div></div><Pointer className="pointer-conflict-preview" /><div className="tour-success-toast"><Waypoints className="size-3.5" /> Conflict resolved automatically</div></div></WindowChrome>;
+  return (
+    <WindowChrome title="app.memoryo.dev/conflicts">
+      <div className="relative h-[calc(100%_-_2.5rem)] overflow-hidden bg-[radial-gradient(circle_at_50%_10%,rgba(244,63,94,.16),transparent_36%),#0e1726] p-4">
+        <p className="text-center text-[9px] font-bold uppercase tracking-[.2em] text-cyan-300">Conflict intelligence</p>
+        <h4 className="mt-1 text-center text-lg font-bold text-white">Two writers disagree</h4>
+        <div className="mx-auto mt-4 grid max-w-lg items-center gap-2 sm:grid-cols-[1fr_auto_1fr]">
+          <div className="rounded-xl border border-emerald-300/30 bg-emerald-300/[0.07] p-3">
+            <div className="flex justify-between"><p className="text-[9px] font-bold text-white">Billing Agent</p><span className="text-[8px] font-bold text-emerald-300">90</span></div>
+            <p className="mt-3 rounded-lg bg-black/20 p-2 text-[10px] font-semibold text-white">Plan is Pro</p>
+          </div>
+          <span className="justify-self-center text-[9px] font-black text-rose-300">VS</span>
+          <div className="rounded-xl border border-slate-400/30 bg-slate-400/[0.07] p-3">
+            <div className="flex justify-between"><p className="text-[9px] font-bold text-white">Support Copilot</p><span className="text-[8px] font-bold text-slate-300">50</span></div>
+            <p className="mt-3 rounded-lg bg-black/20 p-2 text-[10px] font-semibold text-white">Plan is Starter</p>
+          </div>
+        </div>
+        <div className="mx-auto mt-4 flex max-w-sm items-center gap-3 rounded-xl border border-emerald-300/25 bg-emerald-300/10 p-3">
+          <Check className="size-5 shrink-0 text-emerald-300" />
+          <div><p className="text-[10px] font-bold text-emerald-200">Resolved: Plan is Pro</p><p className="mt-0.5 text-[8px] text-slate-400">Higher category authority + direct billing evidence</p></div>
+        </div>
+        <Pointer className="pointer-conflict-preview" />
+        <div className="tour-success-toast"><Waypoints className="size-3.5" /> Conflict resolved automatically</div>
+      </div>
+    </WindowChrome>
+  );
 }
+
 function DemoStage({ active }: { active: number }) {
   const scene = scenes[active];
-  return <div className="relative h-[360px] overflow-hidden bg-[#070b14] p-3 sm:h-[390px]"><div className="pointer-events-none absolute -left-16 top-8 size-48 rounded-full bg-violet-600/30 blur-3xl" /><div className="pointer-events-none absolute -right-16 bottom-0 size-52 rounded-full bg-cyan-400/20 blur-3xl" /><div key={active} className="tour-camera relative h-full" style={{ transformOrigin: scene.origin }}>{active === 0 ? <DomainPreviewScene /> : active === 1 ? <WritersPreviewScene /> : active === 2 ? <ConflictPreviewScene /> : <ApproveScene />}</div></div>;
+  return (
+    <div className="relative h-[360px] overflow-hidden bg-[#070b14] p-3 sm:h-[390px]">
+      <div className="pointer-events-none absolute -left-16 top-8 size-48 rounded-full bg-white/[0.02] blur-3xl" />
+      <div className="pointer-events-none absolute -right-16 bottom-0 size-52 rounded-full bg-cyan-400/10 blur-3xl" />
+      <div key={active} className="tour-camera relative h-full" style={{ transformOrigin: scene.origin }}>
+        {active === 0 ? <DomainPreviewScene /> : active === 1 ? <WritersPreviewScene /> : active === 2 ? <ConflictPreviewScene /> : <ApproveScene />}
+      </div>
+    </div>
+  );
 }
 
 export function HeroProductTour() {
@@ -70,35 +319,38 @@ export function HeroProductTour() {
     return () => window.clearInterval(timer);
   }, []);
 
-  return <div className="overflow-hidden rounded-[1.75rem] border border-slate-800 bg-[#070b14] shadow-[0_28px_90px_rgba(15,23,42,0.22)]">
-    <DemoStage active={active} />    <style jsx global>{`
-      .tour-camera { animation: tour-camera 7.1s cubic-bezier(.22,.8,.25,1) both; }
-      .tour-pointer { position:absolute; z-index:30; color:white; filter:drop-shadow(0 4px 6px rgba(0,0,0,.45)); }
-      .tour-click-ring { position:absolute; left:-7px; top:-7px; width:38px; height:38px; border:2px solid rgb(103 232 249); border-radius:999px; opacity:0; animation:tour-ring 7.1s ease-out both; }
-      .pointer-workspace { left:26%; top:72%; animation:pointer-workspace 7.1s ease-in-out both; }
-      .pointer-api { left:55%; top:74%; animation:pointer-api 7.1s ease-in-out both; }
-      .pointer-agent { left:35%; top:78%; animation:pointer-agent 7.1s ease-in-out both; }
-      .pointer-consent { left:68%; top:70%; animation:pointer-consent 7.1s ease-in-out both; }
-      .pointer-approve { left:35%; top:78%; animation:pointer-approve 7.1s ease-in-out both; }
-      .pointer-domain-preview { right:15%; top:65%; animation:pointer-domain-preview 7.1s ease-in-out both; }
-      .pointer-writers-preview { left:70%; top:70%; animation:pointer-writers-preview 7.1s ease-in-out both; }
-      .pointer-conflict-preview { left:50%; top:67%; animation:pointer-conflict-preview 7.1s ease-in-out both; }
-      .tour-type { display:inline-block; overflow:hidden; white-space:nowrap; max-width:0; animation:tour-type 7.1s steps(22,end) both; }
-      .tour-type-delay { animation-delay:.45s; }
-      .tour-success-toast { position:absolute; right:14px; bottom:14px; z-index:25; display:flex; align-items:center; gap:7px; border:1px solid rgba(110,231,183,.35); border-radius:10px; background:rgba(6,78,59,.92); padding:9px 12px; color:rgb(167 243 208); font-size:9px; font-weight:700; box-shadow:0 14px 35px rgba(0,0,0,.35); animation:tour-toast 7.1s ease both; }
-      @keyframes tour-camera { 0%{transform:scale(.93);opacity:0} 10%{transform:scale(1);opacity:1} 42%{transform:scale(1)} 65%{transform:scale(1.1)} 82%,100%{transform:scale(1.02);opacity:1} }
-      @keyframes tour-type { 0%,12%{max-width:0} 38%,100%{max-width:240px} }
-      @keyframes tour-ring { 0%,53%{opacity:0;transform:scale(.4)} 58%{opacity:1;transform:scale(1)} 66%,100%{opacity:0;transform:scale(1.7)} }
-      @keyframes tour-toast { 0%,61%{opacity:0;transform:translateY(12px)} 70%,94%{opacity:1;transform:translateY(0)} 100%{opacity:0} }
-      @keyframes pointer-workspace { 0%,34%{left:78%;top:20%;opacity:0} 42%{opacity:1} 58%,100%{left:26%;top:72%;opacity:1} }
-      @keyframes pointer-api { 0%,34%{left:82%;top:20%;opacity:0} 42%{opacity:1} 58%,100%{left:55%;top:74%;opacity:1} }
-      @keyframes pointer-agent { 0%,34%{left:82%;top:18%;opacity:0} 42%{opacity:1} 58%,100%{left:35%;top:78%;opacity:1} }
-      @keyframes pointer-consent { 0%,34%{left:20%;top:18%;opacity:0} 42%{opacity:1} 58%,100%{left:68%;top:70%;opacity:1} }
-      @keyframes pointer-approve { 0%,34%{left:80%;top:20%;opacity:0} 42%{opacity:1} 58%,100%{left:35%;top:78%;opacity:1} }
-      @keyframes pointer-domain-preview { 0%,34%{right:4%;top:18%;opacity:0} 42%{opacity:1} 58%,100%{right:15%;top:65%;opacity:1} }
-      @keyframes pointer-writers-preview { 0%,34%{left:80%;top:18%;opacity:0} 42%{opacity:1} 58%,100%{left:70%;top:70%;opacity:1} }
-      @keyframes pointer-conflict-preview { 0%,34%{left:82%;top:20%;opacity:0} 42%{opacity:1} 58%,100%{left:50%;top:67%;opacity:1} }
-      @media (prefers-reduced-motion:reduce){.tour-camera,.tour-pointer,.tour-click-ring,.tour-type,.tour-success-toast{animation:none!important}.tour-type{max-width:240px}.tour-success-toast{opacity:1}}
-    `}</style>
-  </div>;
+  return (
+    <div className="overflow-hidden rounded-[1.75rem] border border-slate-800 bg-[#070b14] shadow-[0_28px_90px_rgba(15,23,42,0.22)]">
+      <DemoStage active={active} />
+      <style jsx global>{`
+        .tour-camera { animation: tour-camera 7.1s cubic-bezier(.22,.8,.25,1) both; }
+        .tour-pointer { position:absolute; z-index:30; color:white; filter:drop-shadow(0 4px 6px rgba(0,0,0,.45)); }
+        .tour-click-ring { position:absolute; left:-7px; top:-7px; width:38px; height:38px; border:2px solid rgb(103 232 249); border-radius:999px; opacity:0; animation:tour-ring 7.1s ease-out both; }
+        .pointer-workspace { left:26%; top:72%; animation:pointer-workspace 7.1s ease-in-out both; }
+        .pointer-api { left:55%; top:74%; animation:pointer-api 7.1s ease-in-out both; }
+        .pointer-agent { left:35%; top:78%; animation:pointer-agent 7.1s ease-in-out both; }
+        .pointer-consent { left:68%; top:70%; animation:pointer-consent 7.1s ease-in-out both; }
+        .pointer-approve { left:35%; top:78%; animation:pointer-approve 7.1s ease-in-out both; }
+        .pointer-domain-preview { right:15%; top:65%; animation:pointer-domain-preview 7.1s ease-in-out both; }
+        .pointer-writers-preview { left:70%; top:70%; animation:pointer-writers-preview 7.1s ease-in-out both; }
+        .pointer-conflict-preview { left:50%; top:67%; animation:pointer-conflict-preview 7.1s ease-in-out both; }
+        .tour-type { display:inline-block; overflow:hidden; white-space:nowrap; max-width:0; animation:tour-type 7.1s steps(22,end) both; }
+        .tour-type-delay { animation-delay:.45s; }
+        .tour-success-toast { position:absolute; right:14px; bottom:14px; z-index:25; display:flex; align-items:center; gap:7px; border:1px solid rgba(110,231,183,.35); border-radius:10px; background:rgba(6,78,59,.92); padding:9px 12px; color:rgb(167 243 208); font-size:9px; font-weight:700; box-shadow:0 14px 35px rgba(0,0,0,.35); animation:tour-toast 7.1s ease both; }
+        @keyframes tour-camera { 0%{transform:scale(.93);opacity:0} 10%{transform:scale(1);opacity:1} 42%{transform:scale(1)} 65%{transform:scale(1.1)} 82%,100%{transform:scale(1.02);opacity:1} }
+        @keyframes tour-type { 0%,12%{max-width:0} 38%,100%{max-width:240px} }
+        @keyframes tour-ring { 0%,53%{opacity:0;transform:scale(.4)} 58%{opacity:1;transform:scale(1)} 66%,100%{opacity:0;transform:scale(1.7)} }
+        @keyframes tour-toast { 0%,61%{opacity:0;transform:translateY(12px)} 70%,94%{opacity:1;transform:translateY(0)} 100%{opacity:0} }
+        @keyframes pointer-workspace { 0%,34%{left:78%;top:20%;opacity:0} 42%{opacity:1} 58%,100%{left:26%;top:72%;opacity:1} }
+        @keyframes pointer-api { 0%,34%{left:82%;top:20%;opacity:0} 42%{opacity:1} 58%,100%{left:55%;top:74%;opacity:1} }
+        @keyframes pointer-agent { 0%,34%{left:82%;top:18%;opacity:0} 42%{opacity:1} 58%,100%{left:35%;top:78%;opacity:1} }
+        @keyframes pointer-consent { 0%,34%{left:20%;top:18%;opacity:0} 42%{opacity:1} 58%,100%{left:68%;top:70%;opacity:1} }
+        @keyframes pointer-approve { 0%,34%{left:80%;top:20%;opacity:0} 42%{opacity:1} 58%,100%{left:35%;top:78%;opacity:1} }
+        @keyframes pointer-domain-preview { 0%,34%{right:4%;top:18%;opacity:0} 42%{opacity:1} 58%,100%{right:15%;top:65%;opacity:1} }
+        @keyframes pointer-writers-preview { 0%,34%{left:80%;top:18%;opacity:0} 42%{opacity:1} 58%,100%{left:70%;top:70%;opacity:1} }
+        @keyframes pointer-conflict-preview { 0%,34%{left:82%;top:20%;opacity:0} 42%{opacity:1} 58%,100%{left:50%;top:67%;opacity:1} }
+        @media (prefers-reduced-motion:reduce){.tour-camera,.tour-pointer,.tour-click-ring,.tour-type,.tour-success-toast{animation:none!important}.tour-type{max-width:240px}.tour-success-toast{opacity:1}}
+      `}</style>
+    </div>
+  );
 }
