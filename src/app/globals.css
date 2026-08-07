@@ -113,21 +113,21 @@ textarea:disabled {
   opacity: 0.55;
 }
 
-/* Keep the visual confidence while avoiding the dense, poster-like weight. */
-.font-black { font-weight: 700; }
+/* Heading defaults — letter-spacing and text-wrap only.
+   font-weight is left to Tailwind utility classes (font-bold, font-black, etc.)
+   so headings render at the weight the author intended. */
 h1,
 h2 {
-  font-weight: 700 !important;
-  letter-spacing: -0.032em !important;
+  letter-spacing: -0.032em;
   text-wrap: balance;
 }
-h3 { font-weight: 650 !important; letter-spacing: -0.018em; }
+h3 { letter-spacing: -0.018em; }
 p { text-wrap: pretty; }
 .uppercase { letter-spacing: 0.12em; }
 
 a { text-decoration: none; }
-:focus-visible { outline: 3px solid rgba(139, 92, 246, 0.5); outline-offset: 3px; }
-::selection { background: rgba(139, 92, 246, 0.3); }
+:focus-visible { outline: 3px solid rgba(103, 232, 249, 0.5); outline-offset: 3px; }
+::selection { background: rgba(103, 232, 249, 0.2); }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
