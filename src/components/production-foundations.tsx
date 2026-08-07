@@ -100,7 +100,7 @@ export function ProductionFoundations() {
     <section ref={sectionRef} id="production" className="production-foundations bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
       <div className="production-foundations__sticky mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-          <div><p className="text-sm font-black uppercase tracking-[0.24em] text-violet-700">Production foundations</p><h2 className="mt-4 text-4xl font-black sm:text-5xl">Reliable after the demo.</h2></div>
+          <div><p className="text-sm font-black uppercase tracking-[0.24em] text-slate-400">Production foundations</p><h2 className="mt-4 text-4xl font-black sm:text-5xl">Reliable after the demo.</h2></div>
           <p className="text-xl leading-9 text-slate-600">MemoryOS provides the controls teams usually discover only after their first memory prototype reaches real users.</p>
         </div>
 
@@ -108,16 +108,16 @@ export function ProductionFoundations() {
           <div ref={trackRef} className="production-foundations__track flex flex-col gap-5 will-change-transform">
             {productionControls.map((item) => {
               const Icon = item.icon;
-              return <article key={item.title} className="production-foundations__card shrink-0 rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-sm transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-cyan-300/30 hover:shadow-xl"><span className="flex size-11 items-center justify-center rounded-xl bg-violet-50 text-violet-700"><Icon className="size-5" /></span><h3 className="mt-8 text-xl font-black">{item.title}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{item.body}</p></article>;
+              return <article key={item.title} className="production-foundations__card shrink-0 rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-sm transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-1 hover:border-cyan-300/30 hover:shadow-xl"><span className="flex size-11 items-center justify-center rounded-xl bg-slate-100 text-slate-700"><Icon className="size-5" /></span><h3 className="mt-8 text-xl font-black">{item.title}</h3><p className="mt-3 text-sm leading-7 text-slate-600">{item.body}</p></article>;
             })}
           </div>
           <div aria-hidden="true" className="production-foundations__fade production-foundations__fade--left pointer-events-none absolute inset-y-0 left-0 w-16" />
           <div aria-hidden="true" className="production-foundations__fade production-foundations__fade--right pointer-events-none absolute inset-y-0 right-0 w-20" />
         </div>
 
-        <div className="mt-8 flex flex-col items-start justify-between gap-5 rounded-[1.5rem] bg-violet-100 p-7 sm:flex-row sm:items-center">
-          <div><p className="font-black text-violet-950">Inspect what MemoryOS stores and why.</p><p className="mt-2 text-sm text-violet-900/70">Use the dashboard for API keys, users, usage, schemas, quality logs, and domain-specific views.</p></div>
-          <a href={signUpUrl("/")} className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-violet-700 px-5 text-sm font-black text-white">Create a workspace <ArrowRight className="size-4" /></a>
+        <div className="mt-8 flex flex-col items-start justify-between gap-5 rounded-[1.5rem] border border-white/10 bg-slate-950 p-7 sm:flex-row sm:items-center">
+          <div><p className="font-black text-white">Inspect what MemoryOS stores and why.</p><p className="mt-2 text-sm text-slate-400">Use the dashboard for API keys, users, usage, schemas, quality logs, and domain-specific views.</p></div>
+          <a href={signUpUrl("/")} className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 text-sm font-black text-slate-950 transition hover:bg-slate-100">Create a workspace <ArrowRight className="size-4" /></a>
         </div>
       </div>
     </section>

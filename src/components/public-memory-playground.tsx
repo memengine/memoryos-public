@@ -58,7 +58,7 @@ export function PublicMemoryPlayground() {
 
   return (
     <section id="playground" className="relative overflow-hidden bg-[#05080d] px-4 py-20 text-white sm:px-6 lg:px-8">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[70rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.13),transparent_62%)]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[70rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03),transparent_62%)]" />
       <div className="relative mx-auto max-w-7xl">
         <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
           <div><p className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.24em] text-cyan-300"><Sparkles className="size-4" /> Memory lab</p><h2 className="mt-4 max-w-2xl text-4xl font-black tracking-[-0.045em] sm:text-5xl">Test the memory decision, not a fake chatbot.</h2></div>
