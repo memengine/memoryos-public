@@ -35,13 +35,11 @@ export const metadata: Metadata = {
     title: "MemoryOS — AI memory that stays reliable",
     description: "Production memory infrastructure for AI products, agents, and services.",
     url: "https://memoryo.dev",
-    images: [{ url: "https://memoryo.dev/og.png", width: 1200, height: 630, alt: "MemoryOS — AI memory that stays reliable" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "MemoryOS — AI memory that stays reliable",
     description: "Production memory infrastructure for AI products, agents, and services.",
-    images: ["https://memoryo.dev/og.png"],
   },
 };
 

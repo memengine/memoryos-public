@@ -1,26 +1,21 @@
 import type { Metadata } from "next";
 
 const BASE_URL = "https://memoryo.dev";
-const OG_IMAGE = `${BASE_URL}/og.png`;
 const SITE_NAME = "MemoryOS";
 
 /**
- * Builds page-specific Metadata with canonical URL, OG, Twitter,
- * and robots — all using absolute URLs and metadataBase.
- *
- * metadataBase is set in layout.tsx already, but we pass absolute
- * URLs here so every page is self-contained and unambiguous.
+ * Builds page-specific Metadata with canonical URL, OG, and Twitter.
+ * The OG image is served by the root opengraph-image.tsx file automatically.
+ * metadataBase in layout.tsx ensures Next.js resolves it correctly.
  */
 export function buildMetadata({
   title,
   description,
   path,
-  image = OG_IMAGE,
 }: {
   title: string;
   description: string;
-  path: string; // e.g. "/" or "/pricing"
-  image?: string;
+  path: string;
 }): Metadata {
   const url = `${BASE_URL}${path}`;
 
@@ -36,20 +31,11 @@ export function buildMetadata({
       title,
       description,
       url,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
     },
   };
 }
